@@ -1,0 +1,45 @@
+{
+  "name": "jungle-gaming-nft-marketplace",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc -b",
+    "typecheck": "tsc -b --pretty false",
+    "lint": "eslint . --max-warnings=0",
+    "preview": "vite preview",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@mswjs/socket.io-binding": "0.2.0",
+    "@tanstack/react-query": "5.107.1",
+    "@tanstack/react-router": "1.170.46",
+    "axios": "1.21.1",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "msw": "2.15.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "socket.io-client": "4.8.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.1",
+    "@playwright/test": "1.65.0",
+    "@tanstack/router-plugin": "1.169.0",
+    "@tailwindcss/vite": "4.3.5",
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.1",
+    "eslint": "9.39.1",
+    "eslint-plugin-react-hooks": "7.0.1",
+    "eslint-plugin-react-refresh": "0.4.24",
+    "globals": "16.5.0",
+    "tailwind-merge": "3.4.0",
+    "tailwindcss": "4.3.5",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.46.0",
+    "vite": "8.3.7"
+  }
+}
