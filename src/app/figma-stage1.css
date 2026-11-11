@@ -1,0 +1,28 @@
+/* Desktop-only corrections verified against the Stage 1 export. */
+@media (min-width: 761px) {
+  .desktop-header { height: 69px; transition: height .22s ease, padding .22s ease; }
+  .desktop-header:has(.store-header-hidden) { height: 0; padding-top: 0; overflow: hidden; }
+  .footer-community { width: 190px; }
+  .footer-community h3 { margin: 0 0 10px; font-size: 15px; }
+  .footer-community .social-icons { margin-bottom: 18px; }
+  .footer-community .wallet-labels { white-space: nowrap; }
+  .footer-community .social-icons,
+  .footer-community .wallet-labels { visibility: visible; }
+}
+
+.cart-item { grid-template-columns: 78px minmax(0, 1fr) 100px 150px 76px; }
+.cart-table-head { grid-template-columns: minmax(0, 1fr) 100px 150px 76px; }
+.cart-item-art { width: 72px; height: 72px; border-radius: 7px; object-fit: cover; }
+.cart-quantity { display: flex; align-items: center; gap: 7px; margin-top: 5px; }
+.cart-quantity button { width: 26px; height: 30px; border: 0; border-radius: 10px; background: #d9904d; color: #120b08; font-size: 18px; }
+.cart-quantity input { width: 35px; min-width: 0; padding: 5px; text-align: center; }
+.related-nfts,
+.cart-recommendations,
+.collector-reviews { max-width: 1200px; margin: 62px auto 0; }
+.related-nfts { display: grid; grid-template-columns: 1fr auto; gap: 20px; }
+.related-nfts > a { align-self: end; color: #d9904d; font-weight: 700; }
+.related-nft-grid { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.collector-reviews { border: 1px solid #4a2d20; border-radius: 10px; padding: 32px; background: #20130f; }
+.collector-reviews h2,
+.cart-recommendations h2 { margin: 8px 0 12px; }
+@media (max-width: 760px) { .cart-item { grid-template-columns: 66px minmax(0, 1fr); } .cart-item-art { width: 60px; height: 60px; } }

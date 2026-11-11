@@ -2,5 +2,6 @@ node_modules/
 dist/
 playwright-report/
 test-results/
+/qa-visual/
 .env.local
 /frontend-challenge.zip

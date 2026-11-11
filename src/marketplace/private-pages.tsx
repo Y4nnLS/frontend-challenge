@@ -6,7 +6,11 @@ import type { Cart, Order, Profile, Wallet, WalletInput } from '@/api/contracts/
 import { marketplaceApi } from '@/api/marketplace-api'
 import { privateKey, useSession } from '@/auth/session-context'
 import { formatEth } from '@/catalog/lib/format-eth'
+import { NftArtwork } from '@/catalog/components/nft-card'
+import { NftCard } from '@/catalog/components/nft-card'
+import { useCatalog } from '@/catalog/queries/use-catalog'
 import { MarketplaceHeader, MobileAccountNavigation } from '@/shared/components/marketplace-header'
+import { MarketplaceFooter } from '@/shared/components/marketplace-footer'
 import { apiErrorMessage } from '@/shared/lib/api-error'
 
 function Protected({ children }: { children: React.ReactNode }) {
@@ -16,7 +20,7 @@ function Protected({ children }: { children: React.ReactNode }) {
   return <>{children}</>
 }
 
-function Page({ children }: { children: React.ReactNode }) { return <div className="kurio-app"><div className="site-container"><div className="desktop-header"><MarketplaceHeader /></div><MobileAccountNavigation /><main className="account-page">{children}</main></div></div> }
+function Page({ children }: { children: React.ReactNode }) { return <div className="kurio-app"><div className="site-container"><div className="desktop-header"><MarketplaceHeader /></div><MobileAccountNavigation /><main className="account-page">{children}</main><MarketplaceFooter /></div></div> }
 
 function AccountSidebar({ active }: { active: 'profile' | 'wallets' }) {
   return <aside className="account-sidebar" aria-label="Meu perfil"><h2>Meu perfil</h2><Link className={active === 'profile' ? 'active' : ''} to="/profile">Dados do perfil</Link><Link className={active === 'wallets' ? 'active' : ''} to="/wallets">Carteiras</Link><span>Atividade</span><span>Lista de interesse</span><span>Ofertas</span><span>Arquivos baixados</span><span>Suporte</span></aside>
@@ -31,14 +35,20 @@ function CartSummary({ cart, checkoutLink = true }: { cart: Cart, checkoutLink?:
   return <aside className="order-summary"><h2>Resumo da compra</h2><p>Subtotal <strong>{formatEth(quote.data.subtotalEth)} ETH</strong></p><p>Desconto <strong>-{formatEth(quote.data.discountEth)} ETH</strong></p><p>Taxa de rede <strong>{formatEth(quote.data.networkFeeEth)} ETH</strong></p><hr/><p className="order-total">Total <strong>{formatEth(quote.data.totalEth)} ETH</strong></p>{checkoutLink && <Link className="primary-button" to="/checkout">Ir para pagamento</Link>}</aside>
 }
 
+function CartArtwork({ nftId, name }: { nftId: string, name: string }) {
+  const nft = useQuery({ queryKey: ['nft', nftId], queryFn: () => marketplaceApi.getNft(nftId), retry: false })
+  return nft.data ? <NftArtwork nft={nft.data} className="cart-item-art"/> : <div className="cart-item-art skeleton" aria-label={`Carregando arte de ${name}`}/>
+}
+
 export function CartPage() {
   const { session } = useSession(); const queryClient = useQueryClient(); const [coupon, setCoupon] = useState(''); const [message, setMessage] = useState('')
   const cart = useQuery({ queryKey: session ? privateKey(session.user.id, 'cart') : ['guest-cart'], queryFn: marketplaceApi.cart, retry: false })
+  const recommendations = useCatalog({ page: 1, pageSize: 4, sort: 'recent' })
   const update = useMutation({ mutationFn: marketplaceApi.setCartItem, onSuccess: (data) => { if (session) queryClient.setQueryData(privateKey(session.user.id, 'cart'), data); else queryClient.setQueryData(['guest-cart'], data) }, onError: (error) => setMessage(apiErrorMessage(error)) })
   const remove = useMutation({ mutationFn: ({ nftId, editionId }: { nftId: string, editionId: string }) => marketplaceApi.removeCartItem(nftId, editionId), onSuccess: (data) => { if (session) queryClient.setQueryData(privateKey(session.user.id, 'cart'), data); else queryClient.setQueryData(['guest-cart'], data) }, onError: (error) => setMessage(apiErrorMessage(error)) })
   const couponMutation = useMutation({ mutationFn: marketplaceApi.setCoupon, onSuccess: (data) => { if (session) queryClient.setQueryData(privateKey(session.user.id, 'cart'), data); else queryClient.setQueryData(['guest-cart'], data); setCoupon(''); setMessage(data.couponCode ? `Cupom ${data.couponCode} aplicado.` : 'Cupom removido.') }, onError: (error) => setMessage(apiErrorMessage(error)) })
-  return <Page><div className="page-breadcrumb">Início / Mercado / Carrinho</div><h1>Seu carrinho</h1>{cart.isPending ? <p className="skeleton" role="status">Carregando carrinho…</p> : cart.isError || !cart.data ? <p role="alert">Não foi possível carregar o carrinho.</p> : <div className="cart-layout"><section className="cart-items"><div className="cart-table-head"><span>NFTs</span><span>Preço</span><span>Quantidade</span><span>Total</span></div>{cart.data.items.length ? cart.data.items.map((item) => <article className="cart-item" key={item.id}><div><h2>{item.name}</h2><p>{item.editionName} · {item.available} disponíveis</p></div><strong>{formatEth(item.unitPriceEth)} ETH</strong><label>Quantidade<input aria-label={`Quantidade de ${item.name}`} type="number" min={1} max={item.available} value={item.quantity} onChange={(event) => update.mutate({ nftId: item.nftId, editionId: item.editionId, quantity: Math.max(1, Number(event.target.value) || 1) })}/></label><button className="secondary-button" type="button" onClick={() => remove.mutate(item)}>Remover</button></article>) : <p>Seu carrinho está vazio. <Link to="/">Explorar NFTs</Link></p>}
-    <form className="coupon-form" onSubmit={(event) => { event.preventDefault(); couponMutation.mutate(coupon) }}><label>Cupom<input value={coupon} onChange={(event) => setCoupon(event.target.value)} placeholder="JUNGLE10" /></label><button className="secondary-button" disabled={couponMutation.isPending}>Aplicar cupom</button>{cart.data.couponCode && <button className="secondary-button" type="button" onClick={() => couponMutation.mutate(null)}>Remover cupom</button>}</form>{message && <p role="status" className="mutation-notice">{message}</p>}</section><CartSummary cart={cart.data}/></div>}</Page>
+  return <Page><div className="page-breadcrumb">Início / Mercado / Carrinho</div><h1>Seu carrinho</h1>{cart.isPending ? <p className="skeleton" role="status">Carregando carrinho…</p> : cart.isError || !cart.data ? <p role="alert">Não foi possível carregar o carrinho.</p> : <div className="cart-layout"><section className="cart-items"><div className="cart-table-head"><span>NFTs</span><span>Preço</span><span>Edições</span><span>Total</span></div>{cart.data.items.length ? cart.data.items.map((item) => <article className="cart-item" key={item.id}><CartArtwork nftId={item.nftId} name={item.name}/><div><h2>{item.name}</h2><p>{item.editionName} · {item.available} disponíveis</p></div><strong>{formatEth(item.unitPriceEth)} ETH</strong><label>Edições<div className="cart-quantity"><button type="button" aria-label={`Diminuir quantidade de ${item.name}`} disabled={item.quantity <= 1} onClick={() => update.mutate({ nftId: item.nftId, editionId: item.editionId, quantity: item.quantity - 1 })}>−</button><input aria-label={`Quantidade de ${item.name}`} type="number" min={1} max={item.available} value={item.quantity} onChange={(event) => update.mutate({ nftId: item.nftId, editionId: item.editionId, quantity: Math.max(1, Number(event.target.value) || 1) })}/><button type="button" aria-label={`Aumentar quantidade de ${item.name}`} disabled={item.quantity >= item.available} onClick={() => update.mutate({ nftId: item.nftId, editionId: item.editionId, quantity: item.quantity + 1 })}>+</button></div></label><button className="secondary-button" type="button" onClick={() => remove.mutate(item)}>Remover</button></article>) : <p>Seu carrinho está vazio. <Link to="/">Explorar NFTs</Link></p>}
+    <form className="coupon-form" onSubmit={(event) => { event.preventDefault(); couponMutation.mutate(coupon) }}><label>Cupom<input value={coupon} onChange={(event) => setCoupon(event.target.value)} placeholder="JUNGLE10" /></label><button className="secondary-button" disabled={couponMutation.isPending}>Aplicar cupom</button>{cart.data.couponCode && <button className="secondary-button" type="button" onClick={() => couponMutation.mutate(null)}>Remover cupom</button>}</form>{message && <p role="status" className="mutation-notice">{message}</p>}</section><CartSummary cart={cart.data}/></div>}{recommendations.data && <section className="cart-recommendations" aria-labelledby="cart-recommendations"><h2 id="cart-recommendations">Colecionadores também viram</h2><div className="related-nft-grid">{recommendations.data.items.slice(0, 3).map(item => <NftCard nft={item} key={item.id}/>)}</div></section>}</Page>
 }
 
 export function CheckoutPage() {

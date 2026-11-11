@@ -1,46 +1,3065 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
-:root{font-family:'Roboto Mono',ui-monospace,SFMono-Regular,Consolas,monospace;color:#f5f1eb;background:#140d0a;font-synthesis:none}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px;background:#140d0a}button,input,select{font:inherit}a{text-decoration:none;color:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}button,a{touch-action:manipulation}a:hover{color:#e89b55}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #e89b55;outline-offset:3px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.text-copper,.eyebrow{color:#d28a4c}
-.kurio-app{background:#140d0a;min-height:100vh;color:#f5f1eb}.site-container{max-width:1200px;width:calc(100% - 48px);margin:0 auto}.desktop-header{padding-top:24px}.store-header{height:45px;border-bottom:1px solid #453125;display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.store-wordmark{font-size:13px;font-weight:700;letter-spacing:.16em;line-height:30px}.store-nav{display:flex;align-items:flex-start;gap:34px;height:45px;color:#e5d6c6;font-size:14px}.store-nav a{line-height:30px;min-width:56px;text-align:center}.store-nav .active{border-bottom:2px solid #d28a4c;color:#d28a4c}.store-actions{display:flex;align-items:center;gap:13px;line-height:28px}.icon-button{border:none;background:none;color:#f5f1eb;display:flex;align-items:center;justify-content:center;padding:4px}.store-cart-symbol{color:#f5f1eb;font-size:16px}.store-login{background:#d28a4c;color:#140d0a;padding:3px 13px;border-radius:5px;font-weight:700;font-size:12px;line-height:22px}.mobile-search-bar{display:none}
-.hero{height:450px;position:relative;display:flex;align-items:center;margin-top:32px;padding:40px;background:transparent}.hero-copy{width:600px;position:relative;z-index:1}.hero-eyebrow{font-size:15px;line-height:16px;margin:0 0 11px;color:#f5f1eb}.hero h1{font-weight:700;font-size:52px;line-height:1.32;letter-spacing:0;margin:0 0 6px}.hero-description{font-size:15px;line-height:24px;max-width:557px;margin:0 0 26px;color:#cfb28c}.hero-cta,.primary-button{display:inline-flex;justify-content:center;align-items:center;background:#d28a4c;color:#140d0a;border:none;border-radius:6px;font-weight:700;font-size:16px;line-height:20px;height:40px;padding:0 28px}.hero-cta:hover,.primary-button:hover{background:#e89b55;color:#140d0a}.hero-cta-arrow{display:none}.hero-visual{position:absolute;right:0;top:0;width:450px;height:450px;overflow:hidden;border-radius:28px}.hero-visual>img:first-child{display:block;width:100%;height:100%;object-fit:cover}.hero-small-art{display:none}.hero-dots{position:absolute;bottom:45px;left:592px;letter-spacing:4px;font-size:13px;color:#d28a4c}.hero-mobile-title,.mobile-description{display:none}
-.marketplace{display:grid;grid-template-columns:310px minmax(0,1fr);column-gap:48px;margin-top:96px;scroll-margin-top:22px}.catalog-sidebar{min-width:0}.filters-card{background:#241612;padding:20px;min-height:785px}.filter-fieldset{border:0;margin:0 0 40px;padding:0;min-width:0}.filter-fieldset legend,.filter-fieldset h3{font-size:18px;line-height:16px;font-weight:700;padding:0;margin:0 0 12px;color:#f5f1eb}.filter-option{min-height:40px;padding:0 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:15px;line-height:40px;color:#cfb28c;cursor:pointer}.filter-option.selected{color:#e89b55}.filter-option input{position:absolute;opacity:0;width:1px;height:1px}.filter-option-static{cursor:default}.clear-category{background:transparent;border:0;color:#e89b55;font-size:11px;display:block;text-align:left;margin-top:9px}.price-filter{margin-top:36px}.visual-range{height:19px;position:relative;margin:20px 0 7px 12px;width:calc(100% - 12px);background:linear-gradient(90deg,#d28a4c 0 64%,#755039 64% 100%) center/100% 3px no-repeat}.visual-range span{position:absolute;top:3px;width:13px;height:13px;background:#d28a4c;border-radius:50%}.visual-range span:first-child{left:0}.visual-range span:last-child{left:64%}.price-filter p{font-size:15px;margin:5px 0 12px 12px;white-space:nowrap}.filter-apply{border:none;border-radius:6px;background:#d28a4c;color:#140d0a;font-size:16px;font-weight:700;padding:8px 12px;margin-left:12px;line-height:20px}.network-filter{margin:0}.network-filter .filter-option{padding-left:12px}.availability-option{display:flex;align-items:center;gap:9px;color:#cfb28c;font-size:11px;margin:22px 0 0 12px}.availability-option input{accent-color:#d28a4c}.reset-button{background:transparent;border:0;color:#e89b55;font-size:11px;margin:8px 0 0 9px}.featured-card{margin-top:24px;background:#382319;height:470px;padding:0;text-align:center;overflow:hidden}.featured-card h3{font-size:24px;margin:22px 0 14px;color:#e89b55}.featured-card p{font-size:16px;font-weight:700;margin:0 0 18px}.featured-card img{display:block;width:100%;height:368px;object-fit:cover;object-position:center top}
-.catalog-main{min-width:0}.catalog-toolbar{min-height:18px;display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:32px}.catalog-tabs{display:flex;align-items:center;gap:20px;white-space:nowrap}.catalog-tabs button{border:0;padding:0;background:transparent;color:#f5f1eb;font-size:15px;line-height:18px;position:relative}.catalog-tabs .active{color:#e89b55}.catalog-tabs .active:after{content:'';position:absolute;height:2px;background:#e89b55;bottom:-6px;left:0;width:100%}.sort-control{display:flex;align-items:center;white-space:nowrap;font-size:14px;color:#f5f1eb;gap:5px}.sort-control select{background:transparent;border:none;color:#f5f1eb;font-size:14px;max-width:199px;padding:0 13px 0 0;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23cfb28c" stroke-width="2"%3E%3Cpath d="m6 9 6 6 6-6"/%3E%3C/svg%3E');background-position:right center;background-repeat:no-repeat}.sort-control select option{background:#241612}.desktop-catalog-search{display:flex;align-items:center;background:#241612;color:#cfb28c;border:1px solid #4b3124;border-radius:6px;padding:8px 11px;gap:12px;margin:0 0 18px;max-width:100%;height:0;opacity:0;overflow:hidden;padding-top:0;padding-bottom:0;margin-bottom:0;border-width:0;transition:height .2s}.desktop-catalog-search:focus-within{height:45px;opacity:1;margin-bottom:18px;border-width:1px;padding:8px 11px}.desktop-catalog-search input,.mobile-search-field input{background:transparent;border:0;color:#f5f1eb;outline:none;min-width:0;width:100%;font-size:15px}.desktop-catalog-search input::placeholder,.mobile-search-field input::placeholder{color:#b39463}.catalog-result-count{height:0;overflow:hidden;color:#cfb28c;font-size:12px}.nft-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:34px;row-gap:72px}.nft-card{position:relative;min-width:0}.nft-art-link{display:block}.nft-art{width:100%;height:300px;background:#241612;display:flex;align-items:center;justify-content:center;padding:4px;overflow:hidden}.nft-image{display:block;width:100%;max-height:250px;height:250px;object-fit:cover;transition:transform .2s}.nft-art-link:hover .nft-image{transform:scale(1.03)}.nft-card-meta{margin-top:12px;display:flex;flex-direction:column;gap:10px}.nft-card-title{display:block;font-size:16px;line-height:16px;color:#f5f1eb;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nft-price{font-size:16px;line-height:16px;color:#e89b55;font-weight:700}.sold-out-tag{position:absolute;top:14px;left:0;padding:8px;background:#d28a4c;color:#140d0a;font-size:13px}.artwork-unavailable{background:#241612;color:#cfb28c;font-size:13px;display:flex;justify-content:center;align-items:center}.catalog-message{padding:75px 20px;background:#241612;text-align:center}.catalog-message h3{font-size:20px}.catalog-message p{color:#cfb28c;font-size:14px}.catalog-pagination{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:88px}.catalog-pagination button{width:35px;height:35px;border:1px solid #4a3227;border-radius:0;background:#140d0a;color:#f5f1eb;font-size:16px}.catalog-pagination .pagination-active{background:#d28a4c;color:#140d0a;border-color:#d28a4c;font-weight:700}.catalog-pagination button:disabled{opacity:.65}
-.skeleton{background:linear-gradient(95deg,#291b15 20%,#3e2b21 45%,#291b15 68%);background-size:220% 100%;animation:shimmer 1.3s linear infinite}.skeleton-title{height:16px;width:75%;margin-top:12px}.skeleton-caption{height:16px;width:45%;margin-top:12px}@keyframes shimmer{to{background-position-x:-220%}}
-.promo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-top:96px}.promo-card{height:250px;background:#2e1c17;display:grid;grid-template-columns:50% 50%;overflow:hidden;border-radius:6px}.promo-card>img{width:100%;height:100%;object-fit:cover}.promo-card>div{padding:37px 28px 40px 0;display:flex;flex-direction:column;align-items:flex-start;text-align:left}.promo-card h2{font-weight:700;font-size:19px;line-height:24px;margin:0 0 12px;color:#f5f1eb}.promo-card p{color:#cfb28c;font-size:14px;line-height:21px;margin:0}.promo-card a{align-self:flex-end;margin-top:auto;background:#d28a4c;border-radius:6px;color:#140d0a;font-size:16px;font-weight:700;padding:9px 18px;line-height:20px}
-.journal{margin-top:96px}.journal>h2{text-align:center;font-size:28px;line-height:37px;font-weight:700;margin:0}.journal>p{text-align:center;font-size:15px;line-height:18px;color:#cfb28c;margin:12px 0 40px}.journal-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}.journal-card{background:#241612;overflow:hidden;min-height:369px}.journal-card>img{width:100%;height:195px;display:block;object-fit:cover}.journal-card>div{padding:12px 16px 16px}.journal-card span{display:block;font-size:12px;line-height:16px;color:#cfb28c}.journal-card h3{font-size:17px;line-height:21px;font-weight:700;margin:8px 0}.journal-card p{font-size:13px;line-height:17px;color:#cfb28c;margin:0}.journal-card .journal-read{color:#e89b55;margin-top:12px;font-weight:700}
-.store-footer{margin-top:96px;font-size:13px}.footer-benefits{background:#241612;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));min-height:250px;padding:28px 32px;gap:22px}.footer-benefits>div{padding-right:15px;border-right:1px solid #704632}.footer-benefits>div:last-child{border:0}.benefit-icon{background:#d28a4c;color:#140d0a;font-size:22px;font-weight:700;border-radius:50%;height:64px;width:64px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}.footer-benefits h3{font-size:16px;line-height:20px;margin:0 0 10px;font-weight:700}.footer-benefits p{font-size:12px;line-height:20px;color:#cfb28c;margin:0}.newsletter form{display:flex;margin:14px 0 12px}.newsletter input{min-width:0;width:100%;background:#3e281b;border:1px solid #6f462b;font-size:11px;padding:10px;color:#f5f1eb}.newsletter button{border:0;background:#d28a4c;color:#140d0a;padding:7px 13px;font-size:13px;font-weight:700}.footer-contact{min-height:88px;background:#3c2315;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:center;padding:20px 32px}.footer-contact strong{font-size:14px;letter-spacing:.1em}.footer-contact span{font-size:12px;line-height:18px}.footer-columns{background:#241612;padding:45px 32px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;min-height:244px}.footer-columns h3{font-size:15px;font-weight:700;margin:0 0 14px}.footer-columns p{font-size:12px;color:#cfb28c;margin:0 0 8px}.footer-columns .social-icons{color:#d28a4c;font-size:20px;margin-bottom:22px}.wallet-labels{color:#d28a4c!important;font-size:9px!important}.copyright{text-align:center;font-size:11px;padding:16px 0;color:#f5f1eb}.copyright a{display:inline-block;margin-left:16px;color:#cfb28c}
-.mobile-bottom-nav{display:none}
-.detail-page{padding-top:43px}.detail-breadcrumb{color:#cfb28c;font-size:13px}.detail-layout{display:grid;grid-template-columns:48% 1fr;gap:44px;margin-top:30px}.detail-art{background:#241612;aspect-ratio:1;padding:15px;max-height:570px}.detail-information h1{font-size:34px;font-weight:700;line-height:1.2;margin:14px 0}.detail-price{color:#e89b55;font-size:20px;font-weight:700}.detail-information hr{border:0;border-top:1px solid #563a2b;margin:22px 0}.detail-information h2{font-size:16px;margin:25px 0 10px}.detail-information>p{font-size:14px;line-height:1.8;color:#cfb28c}.detail-information .detail-availability{color:#e89b55}.detail-information .detail-disclaimer{font-size:12px;color:#a98c72}.detail-information .primary-button{margin-top:18px}
-@media(max-width:1248px){.marketplace{grid-template-columns:280px minmax(0,1fr);gap:32px}.nft-grid{gap:40px 24px}.nft-art{height:auto;aspect-ratio:258/300}.hero-visual{max-width:38%;height:auto;aspect-ratio:1;top:50%;transform:translateY(-50%)}.hero-copy{width:60%}.hero h1{font-size:clamp(28px,4vw,50px)}.catalog-tabs{gap:10px}.catalog-tabs button,.sort-control,.sort-control select{font-size:12px}.promo-card>div{padding:25px 15px}.promo-card h2{font-size:15px}.promo-card p{font-size:12px}}
-@media(max-width:760px){.kurio-app{border-radius:40px 40px 0 0;overflow:hidden}.site-container{width:calc(100% - 48px)}.desktop-header{display:none}.mobile-search-bar{display:flex;align-items:center;gap:8px;padding-top:40px}.mobile-search-field{background:#241612;height:45px;border-radius:11px;display:flex;align-items:center;flex:1;gap:12px;padding:0 14px;color:#bf985f}.mobile-search-field input{font-size:15px;font-weight:700;letter-spacing:.02em}.mobile-filter-button{height:45px;width:45px;border:0;border-radius:14px;background:#d28a4c;color:#140d0a;display:flex;align-items:center;justify-content:center}.hero{margin-top:16px;padding:12px 16px;background:linear-gradient(112deg,#755038,#392319);height:188px;border-radius:32px;align-items:flex-start;overflow:hidden}.hero-copy{width:60%;padding-top:0;z-index:2}.hero-eyebrow{font-size:13px;margin:0 0 6px;line-height:20px}.hero h1{font-size:18px;line-height:1.55;letter-spacing:0;margin:0 0 9px}.hero-desktop-title,.desktop-description{display:none}.hero-mobile-title,.mobile-description{display:inline}.hero-description{font-size:13px;line-height:19px;color:#cfb28c;margin:0 0 4px;max-width:205px}.hero-cta{font-size:13px;background:transparent;color:#e89b55;height:auto;padding:0;line-height:18px}.hero-cta:hover{background:transparent;color:#e89b55}.hero-cta-arrow{display:inline;margin-left:10px;font-size:18px}.hero-visual{top:10px;right:16px;transform:none;width:38%;max-width:none;height:140px;aspect-ratio:auto;border-radius:18px}.hero-visual>img:first-child{object-fit:cover;border-radius:18px}.hero-small-art{display:block!important;position:absolute;width:65px!important;height:65px!important;right:0;bottom:-13px;border-radius:15px;border:4px solid #241612}.hero-dots{bottom:8px;left:48%;font-size:13px;letter-spacing:1px}.marketplace{display:block;margin-top:20px}.catalog-sidebar{display:none}.catalog-sidebar-mobile-open{display:block;margin:0 0 20px}.filters-card{min-height:0;border-radius:14px}.featured-card{display:none}.catalog-toolbar{margin:0 0 14px;min-height:20px}.catalog-tabs{gap:10px}.catalog-tabs button{font-size:14px;line-height:21px}.sort-control{display:none}.desktop-catalog-search{display:none}.nft-grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;row-gap:22px}.nft-card:nth-child(2n){transform:translateY(48px)}.nft-art{height:auto;aspect-ratio:175/200;border-radius:24px;padding:4px;overflow:hidden}.nft-image{width:100%;height:calc(100% - 30px);max-height:none;border-radius:17px;object-fit:cover}.nft-card-meta{margin:12px 8px 0;gap:5px}.nft-card-title{font-size:15px;line-height:19px}.nft-price{font-size:19px;line-height:23px}.catalog-pagination{justify-content:center;margin-top:105px}.promo-grid{grid-template-columns:1fr;gap:16px;margin-top:65px}.promo-card{height:188px}.journal{margin-top:64px}.journal-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.journal-card>img{height:150px}.journal-card>div{padding:12px}.journal>h2{font-size:23px}.journal>p{font-size:12px;line-height:19px}.journal-card h3{font-size:13px}.journal-card p{font-size:11px}.journal-card span{font-size:10px}.store-footer{margin-top:58px}.footer-benefits,.footer-contact,.footer-columns{grid-template-columns:repeat(2,minmax(0,1fr));padding:22px;gap:20px}.footer-benefits{min-height:auto}.footer-benefits>div:nth-child(2){border:0}.footer-contact span{font-size:11px}.copyright{padding-bottom:110px}.mobile-bottom-nav{position:fixed;bottom:0;left:0;right:0;height:96px;background:#241612;border-radius:32px 32px 0 0;z-index:20;display:flex;align-items:center;justify-content:space-around;padding-bottom:8px}.mobile-bottom-nav a,.mobile-bottom-nav button{border:none;background:transparent;color:#d28a4c;display:flex;align-items:center;justify-content:center;font-size:29px;min-width:45px;height:45px}.mobile-bottom-nav .mobile-scan{min-width:67px;height:67px;border-radius:50%;border:3px solid #dc955a;background:#d28a4ccc;color:#fff;transform:translateY(-27px);font-size:38px}.detail-layout{display:block}.detail-information{margin-top:25px}.detail-page{padding-top:30px}}
-@media(max-width:390px){.site-container{width:calc(100% - 38px)}.hero h1{font-size:16px}.hero-description{font-size:11px}.catalog-tabs button{font-size:12px}.catalog-tabs{gap:8px}.nft-card-title{font-size:13px}.nft-price{font-size:17px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.skeleton{animation:none}.nft-image{transition:none}}
-.price-range-input{display:block;width:calc(100% - 12px);margin:24px 0 10px 12px;accent-color:#d28a4c;cursor:pointer;height:13px;background:transparent}.price-range-input:focus-visible{outline:2px solid #e89b55;outline-offset:4px}
-@media(max-width:760px){.nft-card:nth-child(3)::before{display:none}.nft-card:first-child .nft-art::after{display:none}}
-.nft-price-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.nft-original-price{font-size:14px;color:#cfb28c;font-weight:400}
-.mobile-sort-filter{display:none}
-@media(max-width:760px){.mobile-sort-filter{display:flex;flex-direction:column;gap:8px;margin:14px 0 18px;padding:0 12px}.mobile-sort-filter label{font-size:15px;color:#f5f1eb}.mobile-sort-filter select{background:#3d281f;color:#f5f1eb;padding:12px;border:1px solid #6d482d;border-radius:6px;font-size:13px}}
-@media(min-width:761px) and (max-width:900px){.marketplace{grid-template-columns:220px minmax(0,1fr);gap:20px}.catalog-tabs{gap:8px}.catalog-tabs button,.sort-control,.sort-control select{font-size:11px}.sort-control{gap:3px}.sort-control select{max-width:145px}.filters-card{padding:16px}.filter-option{padding:0 6px;font-size:13px}.price-filter p{margin-left:6px;font-size:13px}.filter-apply{margin-left:6px}.availability-option{margin-left:6px}}
+@import './figma-stage1.css';
+
+:root {
+  font-family: 'Roboto Mono', ui-monospace, SFMono-Regular, Consolas, monospace;
+  color: #f5f1eb;
+  background: #140d0a;
+  font-synthesis: none
+}
+
+* {
+  box-sizing: border-box
+}
+
+html {
+  scroll-behavior: smooth
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #140d0a
+}
+
+button,
+input,
+select {
+  font: inherit
+}
+
+a {
+  text-decoration: none;
+  color: inherit
+}
+
+button {
+  cursor: pointer
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: .45
+}
+
+button,
+a {
+  touch-action: manipulation
+}
+
+a:hover {
+  color: #e89b55
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid #e89b55;
+  outline-offset: 3px
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0
+}
+
+.text-copper,
+.eyebrow {
+  color: #d28a4c
+}
+
+.kurio-app {
+  background: #120b08;
+  min-height: 100vh;
+  color: #f5f1eb
+}
+
+.site-container {
+  max-width: 1200px;
+  width: calc(100% - 48px);
+  margin: 0 auto
+}
+
+.desktop-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  padding-top: 24px;
+  background: #120b08
+}
+
+.store-header {
+  height: 45px;
+  border-bottom: 1px solid #453125;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px
+}
+
+.store-wordmark {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  line-height: 30px
+}
+
+.store-nav {
+  display: flex;
+  align-items: flex-start;
+  gap: 34px;
+  height: 45px;
+  color: #e5d6c6;
+  font-size: 14px
+}
+
+.store-nav a {
+  line-height: 30px;
+  min-width: 56px;
+  text-align: center
+}
+
+.store-nav .active {
+  border-bottom: 2px solid #d28a4c;
+  color: #d28a4c
+}
+
+.store-actions {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  line-height: 28px
+}
+
+.icon-button {
+  border: none;
+  background: none;
+  color: #f5f1eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px
+}
+
+.store-cart-symbol {
+  color: #f5f1eb;
+  font-size: 16px
+}
+
+.store-login {
+  background: #d28a4c;
+  color: #140d0a;
+  padding: 3px 13px;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 22px
+}
+
+.mobile-search-bar {
+  display: none
+}
+
+.hero {
+  height: 450px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 32px;
+  padding: 40px;
+  background: transparent
+}
+
+.hero-copy {
+  width: 600px;
+  position: relative;
+  z-index: 1
+}
+
+.hero-eyebrow {
+  font-size: 15px;
+  line-height: 16px;
+  margin: 0 0 11px;
+  color: #f5f1eb
+}
+
+.hero h1 {
+  font-weight: 700;
+  font-size: 52px;
+  line-height: 1.32;
+  letter-spacing: 0;
+  margin: 0 0 6px
+}
+
+.hero-description {
+  font-size: 15px;
+  line-height: 24px;
+  max-width: 557px;
+  margin: 0 0 26px;
+  color: #cfb28c
+}
+
+.hero-cta,
+.primary-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: #d28a4c;
+  color: #140d0a;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  height: 40px;
+  padding: 0 28px
+}
+
+.hero-cta:hover,
+.primary-button:hover {
+  background: #e89b55;
+  color: #140d0a
+}
+
+.hero-cta-arrow {
+  display: none
+}
+
+.hero-visual {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 450px;
+  height: 450px;
+  overflow: hidden;
+  border-radius: 28px
+}
+
+.hero-visual>img:first-child {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover
+}
+
+.hero-small-art {
+  display: none
+}
+
+.hero-dots {
+  position: absolute;
+  bottom: 45px;
+  left: 592px;
+  letter-spacing: 4px;
+  font-size: 13px;
+  color: #d28a4c
+}
+
+.hero-mobile-title,
+.mobile-description {
+  display: none
+}
+
+.marketplace {
+  display: grid;
+  grid-template-columns: 310px minmax(0, 1fr);
+  column-gap: 48px;
+  margin-top: 96px;
+  scroll-margin-top: 92px
+}
+
+.catalog-sidebar {
+  min-width: 0
+}
+
+.filters-card {
+  background: #241612;
+  padding: 20px;
+  min-height: 785px
+}
+
+.filter-fieldset {
+  border: 0;
+  margin: 0 0 40px;
+  padding: 0;
+  min-width: 0
+}
+
+.filter-fieldset legend,
+.filter-fieldset h3 {
+  font-size: 18px;
+  line-height: 16px;
+  font-weight: 700;
+  padding: 0;
+  margin: 0 0 12px;
+  color: #f5f1eb
+}
+
+.filter-option {
+  min-height: 40px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 40px;
+  color: #cfb28c;
+  cursor: pointer
+}
+
+.filter-option.selected {
+  color: #e89b55
+}
+
+.filter-option input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px
+}
+
+.filter-option-static {
+  cursor: default
+}
+
+.clear-category {
+  background: transparent;
+  border: 0;
+  color: #e89b55;
+  font-size: 11px;
+  display: block;
+  text-align: left;
+  margin-top: 9px
+}
+
+.price-filter {
+  margin-top: 36px
+}
+
+.visual-range {
+  height: 19px;
+  position: relative;
+  margin: 20px 0 7px 12px;
+  width: calc(100% - 12px);
+  background: linear-gradient(90deg, #d28a4c 0 64%, #755039 64% 100%) center/100% 3px no-repeat
+}
+
+.visual-range span {
+  position: absolute;
+  top: 3px;
+  width: 13px;
+  height: 13px;
+  background: #d28a4c;
+  border-radius: 50%
+}
+
+.visual-range span:first-child {
+  left: 0
+}
+
+.visual-range span:last-child {
+  left: 64%
+}
+
+.price-filter p {
+  font-size: 15px;
+  margin: 5px 0 12px 12px;
+  white-space: nowrap
+}
+
+.filter-apply {
+  border: none;
+  border-radius: 6px;
+  background: #d28a4c;
+  color: #140d0a;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 8px 12px;
+  margin-left: 12px;
+  line-height: 20px
+}
+
+.network-filter {
+  margin: 0
+}
+
+.network-filter .filter-option {
+  padding-left: 12px
+}
+
+.availability-option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #cfb28c;
+  font-size: 11px;
+  margin: 22px 0 0 12px
+}
+
+.reset-button {
+  background: transparent;
+  border: 0;
+  color: #e89b55;
+  font-size: 11px;
+  margin: 8px 0 0 12px
+}
+
+.featured-card {
+  margin-top: 24px;
+  background: #382319;
+  height: 470px;
+  padding: 0;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 7px
+}
+
+.featured-card h3 {
+  font-size: 24px;
+  margin: 22px 0 14px;
+  color: #e89b55
+}
+
+.featured-card p {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 18px
+}
+
+.featured-card img {
+  display: block;
+  width: 100%;
+  height: 368px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 12px 12px 0 0
+}
+
+.catalog-main {
+  min-width: 0
+}
+
+.catalog-toolbar {
+  min-height: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px
+}
+
+.catalog-tabs {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  white-space: nowrap
+}
+
+.catalog-tabs button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #f5f1eb;
+  font-size: 15px;
+  line-height: 18px;
+  position: relative
+}
+
+.catalog-tabs .active {
+  color: #e89b55
+}
+
+.catalog-tabs .active:after {
+  content: '';
+  position: absolute;
+  height: 2px;
+  background: #e89b55;
+  bottom: -6px;
+  left: 0;
+  width: 100%
+}
+
+.sort-control {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 14px;
+  color: #f5f1eb;
+  gap: 5px
+}
+
+.sort-control select {
+  background: transparent;
+  border: none;
+  color: #f5f1eb;
+  font-size: 14px;
+  max-width: 199px;
+  padding: 0 13px 0 0;
+  appearance: none;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23cfb28c" stroke-width="2"%3E%3Cpath d="m6 9 6 6 6-6"/%3E%3C/svg%3E');
+  background-position: right center;
+  background-repeat: no-repeat
+}
+
+.sort-control select option {
+  background: #241612
+}
+
+.desktop-catalog-search {
+  display: flex;
+  align-items: center;
+  background: #241612;
+  color: #cfb28c;
+  border: 1px solid #4b3124;
+  border-radius: 6px;
+  padding: 8px 11px;
+  gap: 12px;
+  margin: 0 0 18px;
+  max-width: 100%;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-width: 0;
+  transition: height .2s
+}
+
+.desktop-catalog-search:focus-within {
+  height: 45px;
+  opacity: 1;
+  margin-bottom: 18px;
+  border-width: 1px;
+  padding: 8px 11px
+}
+
+.desktop-catalog-search input,
+.mobile-search-field input {
+  background: transparent;
+  border: 0;
+  color: #f5f1eb;
+  outline: none;
+  min-width: 0;
+  width: 100%;
+  font-size: 15px
+}
+
+.desktop-catalog-search input::placeholder,
+.mobile-search-field input::placeholder {
+  color: #b39463
+}
+
+.catalog-result-count {
+  height: 0;
+  overflow: hidden;
+  color: #cfb28c;
+  font-size: 12px
+}
+
+.nft-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 34px;
+  row-gap: 72px
+}
+
+.nft-card {
+  position: relative;
+  min-width: 0
+}
+
+.nft-art-link {
+  display: block
+}
+
+.nft-art {
+  width: 100%;
+  height: 300px;
+  background: #241612;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  overflow: hidden
+}
+
+.nft-image {
+  display: block;
+  width: 100%;
+  max-height: 250px;
+  height: 250px;
+  object-fit: cover;
+  transition: transform .2s
+}
+
+.nft-art-link:hover .nft-image {
+  transform: scale(1.03)
+}
+
+.nft-card-meta {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px
+}
+
+.nft-card-title {
+  display: block;
+  font-size: 16px;
+  line-height: 16px;
+  color: #f5f1eb;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.nft-price {
+  font-size: 16px;
+  line-height: 16px;
+  color: #e89b55;
+  font-weight: 700
+}
+
+.sold-out-tag {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  padding: 8px;
+  background: #d28a4c;
+  color: #140d0a;
+  font-size: 13px
+}
+
+.artwork-unavailable {
+  background: #241612;
+  color: #cfb28c;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.catalog-message {
+  padding: 75px 20px;
+  background: #241612;
+  text-align: center
+}
+
+.catalog-message h3 {
+  font-size: 20px
+}
+
+.catalog-message p {
+  color: #cfb28c;
+  font-size: 14px
+}
+
+.catalog-pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin-top: 88px
+}
+
+.catalog-pagination button {
+  width: 35px;
+  height: 35px;
+  border: 1px solid #4a3227;
+  border-radius: 0;
+  background: #140d0a;
+  color: #f5f1eb;
+  font-size: 16px
+}
+
+.catalog-pagination .pagination-active {
+  background: #d28a4c;
+  color: #140d0a;
+  border-color: #d28a4c;
+  font-weight: 700
+}
+
+.catalog-pagination button:disabled {
+  opacity: .65
+}
+
+.skeleton {
+  background: linear-gradient(95deg, #291b15 20%, #3e2b21 45%, #291b15 68%);
+  background-size: 220% 100%;
+  animation: shimmer 1.3s linear infinite
+}
+
+.skeleton-title {
+  height: 16px;
+  width: 75%;
+  margin-top: 12px
+}
+
+.skeleton-caption {
+  height: 16px;
+  width: 45%;
+  margin-top: 12px
+}
+
+@keyframes shimmer {
+  to {
+    background-position-x: -220%
+  }
+}
+
+.promo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 96px
+}
+
+.promo-card {
+  height: 250px;
+  background: #2e1c17;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  overflow: hidden;
+  border-radius: 6px
+}
+
+.promo-card>img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover
+}
+
+.promo-card>div {
+  padding: 37px 28px 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left
+}
+
+.promo-card h2 {
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 24px;
+  margin: 0 0 12px;
+  color: #f5f1eb
+}
+
+.promo-card p {
+  color: #cfb28c;
+  font-size: 14px;
+  line-height: 21px;
+  margin: 0
+}
+
+.promo-card a {
+  align-self: flex-end;
+  margin-top: auto;
+  background: #d28a4c;
+  border-radius: 6px;
+  color: #140d0a;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 9px 18px;
+  line-height: 20px
+}
+
+.journal {
+  margin-top: 96px
+}
+
+.journal>h2 {
+  text-align: center;
+  font-size: 28px;
+  line-height: 37px;
+  font-weight: 700;
+  margin: 0
+}
+
+.journal>p {
+  text-align: center;
+  font-size: 15px;
+  line-height: 18px;
+  color: #cfb28c;
+  margin: 12px 0 40px
+}
+
+.journal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px
+}
+
+.journal-card {
+  background: #241612;
+  overflow: hidden;
+  min-height: 369px
+}
+
+.journal-card>img {
+  width: 100%;
+  height: 195px;
+  display: block;
+  object-fit: cover
+}
+
+.journal-card>div {
+  padding: 12px 16px 16px
+}
+
+.journal-card span {
+  display: block;
+  font-size: 12px;
+  line-height: 16px;
+  color: #cfb28c
+}
+
+.journal-card h3 {
+  font-size: 17px;
+  line-height: 21px;
+  font-weight: 700;
+  margin: 8px 0
+}
+
+.journal-card p {
+  font-size: 13px;
+  line-height: 17px;
+  color: #cfb28c;
+  margin: 0
+}
+
+.journal-card .journal-read {
+  color: #e89b55;
+  margin-top: 12px;
+  font-weight: 700
+}
+
+.store-footer {
+  margin-top: 96px;
+  font-size: 13px
+}
+
+.footer-benefits {
+  background: #241612;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  min-height: 250px;
+  padding: 28px 32px;
+  gap: 22px
+}
+
+.footer-benefits>div {
+  padding-right: 15px;
+  border-right: 1px solid #704632
+}
+
+.footer-benefits>div:last-child {
+  border: 0
+}
+
+.benefit-icon {
+  background: #d28a4c;
+  color: #140d0a;
+  font-size: 22px;
+  font-weight: 700;
+  border-radius: 50%;
+  height: 64px;
+  width: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px
+}
+
+.footer-benefits h3 {
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0 0 10px;
+  font-weight: 700
+}
+
+.footer-benefits p {
+  font-size: 12px;
+  line-height: 20px;
+  color: #cfb28c;
+  margin: 0
+}
+
+.newsletter form {
+  display: flex;
+  margin: 14px 0 12px
+}
+
+.newsletter input {
+  min-width: 0;
+  width: 100%;
+  background: #3e281b;
+  border: 1px solid #6f462b;
+  font-size: 11px;
+  padding: 10px;
+  color: #f5f1eb
+}
+
+.newsletter button {
+  border: 0;
+  background: #d28a4c;
+  color: #140d0a;
+  padding: 7px 13px;
+  font-size: 13px;
+  font-weight: 700
+}
+
+.footer-contact {
+  min-height: 88px;
+  background: #3c2315;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding: 20px 32px
+}
+
+.footer-contact strong {
+  font-size: 14px;
+  letter-spacing: .1em
+}
+
+.footer-contact span {
+  font-size: 12px;
+  line-height: 18px
+}
+
+.footer-columns {
+  background: #241612;
+  padding: 45px 32px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  min-height: 244px
+}
+
+.footer-columns h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 14px
+}
+
+.footer-columns p {
+  font-size: 12px;
+  color: #cfb28c;
+  margin: 0 0 8px
+}
+
+.footer-columns .social-icons {
+  color: #d28a4c;
+  font-size: 20px;
+  margin-bottom: 22px
+}
+
+.wallet-labels {
+  color: #d28a4c !important;
+  font-size: 9px !important
+}
+
+.copyright {
+  text-align: center;
+  font-size: 11px;
+  padding: 16px 0;
+  color: #f5f1eb
+}
+
+.copyright a {
+  display: inline-block;
+  margin-left: 16px;
+  color: #cfb28c
+}
+
+.mobile-bottom-nav {
+  display: none
+}
+
+.detail-page {
+  padding-top: 43px
+}
+
+.detail-breadcrumb {
+  color: #cfb28c;
+  font-size: 13px
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 48% 1fr;
+  gap: 44px;
+  margin-top: 30px
+}
+
+.detail-art {
+  background: #241612;
+  aspect-ratio: 1;
+  padding: 15px;
+  max-height: 570px
+}
+
+.detail-information h1 {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 14px 0
+}
+
+.detail-price {
+  color: #e89b55;
+  font-size: 20px;
+  font-weight: 700
+}
+
+.detail-information hr {
+  border: 0;
+  border-top: 1px solid #563a2b;
+  margin: 22px 0
+}
+
+.detail-information h2 {
+  font-size: 16px;
+  margin: 25px 0 10px
+}
+
+.detail-information>p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #cfb28c
+}
+
+.detail-information .detail-availability {
+  color: #e89b55
+}
+
+.detail-information .detail-disclaimer {
+  font-size: 12px;
+  color: #a98c72
+}
+
+.detail-information .primary-button {
+  margin-top: 18px
+}
+
+@media(max-width:1248px) {
+  .marketplace {
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 32px
+  }
+
+  .nft-grid {
+    gap: 40px 24px
+  }
+
+  .nft-art {
+    height: auto;
+    aspect-ratio: 258/300
+  }
+
+  .hero-visual {
+    max-width: 38%;
+    height: auto;
+    aspect-ratio: 1;
+    top: 50%;
+    transform: translateY(-50%)
+  }
+
+  .hero-copy {
+    width: 60%
+  }
+
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 50px)
+  }
+
+  .catalog-tabs {
+    gap: 10px
+  }
+
+  .catalog-tabs button,
+  .sort-control,
+  .sort-control select {
+    font-size: 12px
+  }
+
+  .promo-card>div {
+    padding: 25px 15px
+  }
+
+  .promo-card h2 {
+    font-size: 15px
+  }
+
+  .promo-card p {
+    font-size: 12px
+  }
+}
+
+@media(max-width:760px) {
+  .kurio-app {
+    border-radius: 40px 40px 0 0;
+    overflow: hidden
+  }
+
+  .site-container {
+    width: calc(100% - 48px)
+  }
+
+  .desktop-header {
+    display: none
+  }
+
+  .mobile-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 40px
+  }
+
+  .mobile-search-field {
+    background: #241612;
+    height: 45px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 12px;
+    padding: 0 14px;
+    color: #bf985f
+  }
+
+  .mobile-search-field input {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .02em
+  }
+
+  .mobile-filter-button {
+    height: 45px;
+    width: 45px;
+    border: 0;
+    border-radius: 14px;
+    background: #d28a4c;
+    color: #140d0a;
+    display: flex;
+    align-items: center;
+    justify-content: center
+  }
+
+  .hero {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: linear-gradient(112deg, #755038, #392319);
+    height: 188px;
+    border-radius: 32px;
+    align-items: flex-start;
+    overflow: hidden
+  }
+
+  .hero-copy {
+    width: 60%;
+    padding-top: 0;
+    z-index: 2
+  }
+
+  .hero-eyebrow {
+    font-size: 13px;
+    margin: 0 0 6px;
+    line-height: 20px
+  }
+
+  .hero h1 {
+    font-size: 18px;
+    line-height: 1.55;
+    letter-spacing: 0;
+    margin: 0 0 9px
+  }
+
+  .hero-desktop-title,
+  .desktop-description {
+    display: none
+  }
+
+  .hero-mobile-title,
+  .mobile-description {
+    display: inline
+  }
+
+  .hero-description {
+    font-size: 13px;
+    line-height: 19px;
+    color: #cfb28c;
+    margin: 0 0 4px;
+    max-width: 205px
+  }
+
+  .hero-cta {
+    font-size: 13px;
+    background: transparent;
+    color: #e89b55;
+    height: auto;
+    padding: 0;
+    line-height: 18px
+  }
+
+  .hero-cta:hover {
+    background: transparent;
+    color: #e89b55
+  }
+
+  .hero-cta-arrow {
+    display: inline;
+    margin-left: 10px;
+    font-size: 18px
+  }
+
+  .hero-visual {
+    top: 10px;
+    right: 16px;
+    transform: none;
+    width: 38%;
+    max-width: none;
+    height: 140px;
+    aspect-ratio: auto;
+    border-radius: 18px
+  }
+
+  .hero-visual>img:first-child {
+    object-fit: cover;
+    border-radius: 18px
+  }
+
+  .hero-small-art {
+    display: block !important;
+    position: absolute;
+    width: 65px !important;
+    height: 65px !important;
+    right: 0;
+    bottom: -13px;
+    border-radius: 15px;
+    border: 4px solid #241612
+  }
+
+  .hero-dots {
+    bottom: 8px;
+    left: 48%;
+    font-size: 13px;
+    letter-spacing: 1px
+  }
+
+  .marketplace {
+    display: block;
+    margin-top: 20px
+  }
+
+  .catalog-sidebar {
+    display: none
+  }
+
+  .catalog-sidebar-mobile-open {
+    display: block;
+    margin: 0 0 20px
+  }
+
+  .filters-card {
+    min-height: 0;
+    border-radius: 14px
+  }
+
+  .featured-card {
+    display: none
+  }
+
+  .catalog-toolbar {
+    margin: 0 0 14px;
+    min-height: 20px
+  }
+
+  .catalog-tabs {
+    gap: 10px
+  }
+
+  .catalog-tabs button {
+    font-size: 14px;
+    line-height: 21px
+  }
+
+  .sort-control {
+    display: none
+  }
+
+  .desktop-catalog-search {
+    display: none
+  }
+
+  .nft-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
+    row-gap: 22px
+  }
+
+  .nft-card:nth-child(2n) {
+    transform: translateY(48px)
+  }
+
+  .nft-art {
+    height: auto;
+    aspect-ratio: 175/200;
+    border-radius: 24px;
+    padding: 4px;
+    overflow: hidden
+  }
+
+  .nft-image {
+    width: 100%;
+    height: calc(100% - 30px);
+    max-height: none;
+    border-radius: 17px;
+    object-fit: cover
+  }
+
+  .nft-card-meta {
+    margin: 12px 8px 0;
+    gap: 5px
+  }
+
+  .nft-card-title {
+    font-size: 15px;
+    line-height: 19px
+  }
+
+  .nft-price {
+    font-size: 19px;
+    line-height: 23px
+  }
+
+  .catalog-pagination {
+    justify-content: center;
+    margin-top: 105px
+  }
+
+  .promo-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 65px
+  }
+
+  .promo-card {
+    height: 188px
+  }
+
+  .journal {
+    margin-top: 64px
+  }
+
+  .journal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px
+  }
+
+  .journal-card>img {
+    height: 150px
+  }
+
+  .journal-card>div {
+    padding: 12px
+  }
+
+  .journal>h2 {
+    font-size: 23px
+  }
+
+  .journal>p {
+    font-size: 12px;
+    line-height: 19px
+  }
+
+  .journal-card h3 {
+    font-size: 13px
+  }
+
+  .journal-card p {
+    font-size: 11px
+  }
+
+  .journal-card span {
+    font-size: 10px
+  }
+
+  .store-footer {
+    margin-top: 58px
+  }
+
+  .footer-benefits,
+  .footer-contact,
+  .footer-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 22px;
+    gap: 20px
+  }
+
+  .footer-benefits {
+    min-height: auto
+  }
+
+  .footer-benefits>div:nth-child(2) {
+    border: 0
+  }
+
+  .footer-contact span {
+    font-size: 11px
+  }
+
+  .copyright {
+    padding-bottom: 110px
+  }
+
+  .mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 96px;
+    background: #241612;
+    border-radius: 32px 32px 0 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 8px
+  }
+
+  .mobile-bottom-nav a,
+  .mobile-bottom-nav button {
+    border: none;
+    background: transparent;
+    color: #d28a4c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 29px;
+    min-width: 45px;
+    height: 45px
+  }
+
+  .mobile-bottom-nav .mobile-scan {
+    min-width: 67px;
+    height: 67px;
+    border-radius: 50%;
+    border: 3px solid #dc955a;
+    background: #d28a4ccc;
+    color: #fff;
+    transform: translateY(-27px);
+    font-size: 38px
+  }
+
+  .detail-layout {
+    display: block
+  }
+
+  .detail-information {
+    margin-top: 25px
+  }
+
+  .detail-page {
+    padding-top: 30px
+  }
+}
+
+@media(max-width:390px) {
+  .site-container {
+    width: calc(100% - 38px)
+  }
+
+  .hero h1 {
+    font-size: 16px
+  }
+
+  .hero-description {
+    font-size: 11px
+  }
+
+  .catalog-tabs button {
+    font-size: 12px
+  }
+
+  .catalog-tabs {
+    gap: 8px
+  }
+
+  .nft-card-title {
+    font-size: 13px
+  }
+
+  .nft-price {
+    font-size: 17px
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior: auto
+  }
+
+  .skeleton {
+    animation: none
+  }
+
+  .nft-image {
+    transition: none
+  }
+}
+
+.price-range-input {
+  display: block;
+  width: calc(100% - 12px);
+  margin: 24px 0 10px 12px;
+  accent-color: #d28a4c;
+  cursor: pointer;
+  height: 13px;
+  background: transparent
+}
+
+.price-range-input:focus-visible {
+  outline: 2px solid #e89b55;
+  outline-offset: 4px
+}
+
+@media(max-width:760px) {
+  .nft-card:nth-child(3)::before {
+    display: none
+  }
+
+  .nft-card:first-child .nft-art::after {
+    display: none
+  }
+}
+
+.nft-price-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap
+}
+
+.nft-original-price {
+  font-size: 14px;
+  color: #cfb28c;
+  font-weight: 400
+}
+
+.mobile-sort-filter {
+  display: none
+}
+
+@media(max-width:760px) {
+  .mobile-sort-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 14px 0 18px;
+    padding: 0 12px
+  }
+
+  .mobile-sort-filter label {
+    font-size: 15px;
+    color: #f5f1eb
+  }
+
+  .mobile-sort-filter select {
+    background: #3d281f;
+    color: #f5f1eb;
+    padding: 12px;
+    border: 1px solid #6d482d;
+    border-radius: 6px;
+    font-size: 13px
+  }
+}
+
+@media(min-width:761px) and (max-width:900px) {
+  .marketplace {
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 20px
+  }
+
+  .catalog-tabs {
+    gap: 8px
+  }
+
+  .catalog-tabs button,
+  .sort-control,
+  .sort-control select {
+    font-size: 11px
+  }
+
+  .sort-control {
+    gap: 3px
+  }
+
+  .sort-control select {
+    max-width: 145px
+  }
+
+  .filters-card {
+    padding: 16px
+  }
+
+  .filter-option {
+    padding: 0 6px;
+    font-size: 13px
+  }
+
+  .price-filter p {
+    margin-left: 6px;
+    font-size: 13px
+  }
+
+  .filter-apply {
+    margin-left: 6px
+  }
+
+  .availability-option {
+    margin-left: 6px
+  }
+}
 
 /* Shared controls derived from the Figma exports. */
-.store-header{align-items:center;height:48px}.store-nav{align-items:center;height:48px;gap:28px}.store-nav a{line-height:48px;min-width:auto}.store-actions{gap:14px}.store-cart-symbol{position:relative;display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;color:#f5f1eb}.store-cart-symbol:hover{color:#e89b55}.cart-badge{position:absolute;right:-3px;top:0;min-width:16px;height:16px;padding:0 4px;border-radius:99px;background:#d28a4c;color:#140d0a;font-size:10px;line-height:16px;text-align:center;font-weight:700}.store-login{display:inline-flex;align-items:center;gap:6px}.store-profile{max-width:180px}.store-profile span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.icon-button{width:34px;height:34px;border-radius:6px}.icon-button:hover{background:#241612;color:#e89b55}.nft-art{border-radius:7px;padding:12px}.nft-image{border-radius:4px}.nft-card{border-radius:7px}.journal-card,.promo-card{border-radius:7px}.primary-button,.hero-cta{transition:background-color .18s ease,transform .18s ease}.primary-button:active,.hero-cta:active{transform:translateY(1px)}
-.filter-option-static{opacity:.62}.filter-option-static span:last-child{font-variant-numeric:tabular-nums}.filter-option input:focus-visible + span{outline:2px solid #e89b55;outline-offset:4px}.price-range-input{accent-color:#d9904d}.promo-card{border:1px solid #362219}.journal-card{border-radius:7px}.journal-card>img{border-bottom:1px solid #4b3124}.social-icons{display:flex!important;gap:8px;flex-wrap:wrap;margin:0 0 22px!important}.social-icons span{display:grid;place-items:center;width:30px;height:30px;border:1px solid #d28a4c;border-radius:5px;color:#d28a4c;font-size:13px;font-weight:700}.wallet-labels{display:flex;flex-wrap:wrap;gap:5px!important}.wallet-labels span{padding:5px 7px;border-radius:5px;background:#482b18;color:#e89b55;font-size:8px;font-weight:700}.newsletter input{border-radius:5px 0 0 5px}.newsletter button{border-radius:0 5px 5px 0}.copyright{border-top:1px solid #3d281e;margin-top:0}
-@media(max-width:760px){.mobile-bottom-nav{height:102px;border-radius:42px 42px 0 0;padding:13px max(20px, env(safe-area-inset-right)) calc(9px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));overflow:visible;isolation:isolate}.mobile-bottom-nav::before{content:'';position:absolute;width:98px;height:56px;left:50%;top:-1px;transform:translateX(-50%);border-radius:0 0 54px 54px;background:#140d0a;z-index:-1}.mobile-bottom-nav a,.mobile-bottom-nav button{width:48px;height:48px;min-width:48px;color:#cfb28c;font-size:0;border-radius:50%}.mobile-bottom-nav a.active,.mobile-bottom-nav a:hover{color:#e89b55}.mobile-bottom-nav .mobile-scan{width:70px;height:70px;min-width:70px;border:3px solid #dc955a;background:#c77e41;color:#f5f1eb;transform:translateY(-34px);box-shadow:0 8px 24px #0006}.mobile-bottom-nav svg{width:24px;height:24px}.mobile-bottom-nav .mobile-scan svg{width:30px;height:30px}.copyright{padding-bottom:126px}}
+.store-header {
+  align-items: center;
+  height: 48px
+}
+
+.store-nav {
+  align-items: center;
+  height: 48px;
+  gap: 28px
+}
+
+.store-nav a {
+  line-height: 48px;
+  min-width: auto
+}
+
+.store-actions {
+  gap: 14px
+}
+
+.store-cart-symbol {
+  position: relative;
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  color: #f5f1eb
+}
+
+.store-cart-symbol:hover {
+  color: #e89b55
+}
+
+.cart-badge {
+  position: absolute;
+  right: -3px;
+  top: 0;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 99px;
+  background: #d28a4c;
+  color: #140d0a;
+  font-size: 10px;
+  line-height: 16px;
+  text-align: center;
+  font-weight: 700
+}
+
+.store-login {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px
+}
+
+.store-profile {
+  max-width: 180px
+}
+
+.store-profile span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+.icon-button {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px
+}
+
+.icon-button:hover {
+  background: #241612;
+  color: #e89b55
+}
+
+.nft-art {
+  border-radius: 7px;
+  padding: 12px
+}
+
+.nft-image {
+  border-radius: 4px
+}
+
+.nft-card {
+  border-radius: 7px
+}
+
+.journal-card,
+.promo-card {
+  border-radius: 7px
+}
+
+.primary-button,
+.hero-cta {
+  transition: background-color .18s ease, transform .18s ease
+}
+
+.primary-button:active,
+.hero-cta:active {
+  transform: translateY(1px)
+}
+
+.store-header {
+  transition: transform .22s ease, opacity .22s ease
+}
+
+.store-header-hidden {
+  transform: translateY(-130%);
+  opacity: 0;
+  pointer-events: none
+}
+
+.filter-option-static {
+  opacity: .62
+}
+
+.filter-option-static span:last-child {
+  font-variant-numeric: tabular-nums
+}
+
+.filter-option input:focus-visible+span {
+  outline: 2px solid #e89b55;
+  outline-offset: 4px
+}
+
+.price-slider {
+  position: relative;
+  height: 26px;
+  margin: 18px 12px 8px
+}
+
+.price-slider-track {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #76503a
+}
+
+.price-slider-track>span {
+  display: block;
+  height: 100%;
+  background: #d9904d
+}
+
+.price-slider-track i {
+  position: absolute;
+  top: -5px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #d9904d;
+  border: 2px solid #241612;
+  transform: translateX(-50%)
+}
+
+.price-slider-min {
+  left: 0
+}
+
+.price-range-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer
+}
+
+.price-range-input:focus-visible+* {
+  outline: 2px solid #e89b55
+}
+
+.promo-card {
+  border: 0
+}
+
+.promo-card>img {
+  height: 100%;
+  margin: 0;
+  border-radius: 7px 0 0 7px
+}
+
+.promo-card>div {
+  height: auto;
+  padding: 25px 24px;
+  align-items: right;
+  justify-content: right;
+  text-align: right
+}
+
+.promo-card a {
+  align-self: right;
+  margin-top: 15px
+}
+
+.journal-card {
+  border-radius: 7px
+}
+
+.journal-card>img {
+  border-bottom: 1px solid #4b3124
+}
+
+.social-icons {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 22px
+}
+
+.social-icons span {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #d28a4c;
+  border-radius: 5px;
+  color: #d28a4c
+}
+
+.wallet-labels {
+  display: flex;
+  gap: 4px;
+  padding: 5px 7px;
+  border: 1px solid #9b612f;
+  border-radius: 5px;
+  background: #9d5d293d;
+  color: #e89b55 !important;
+  font-size: 8px !important;
+  font-weight: 700
+}
+
+.wallet-labels span+span::before {
+  content: '·';
+  margin-right: 4px
+}
+
+.newsletter input {
+  border-radius: 5px 0 0 5px
+}
+
+.newsletter button {
+  border-radius: 0 5px 5px 0
+}
+
+.copyright {
+  border-top: 1px solid #3d281e;
+  margin-top: 0
+}
+
+.availability-option,
+.reset-button {
+  display: none
+}
+
+.catalog-pagination button {
+  border-radius: 5px
+}
+
+.store-footer {
+  position: relative
+}
+
+.footer-community .social-icons,
+.footer-community .wallet-labels {
+  visibility: visible
+}
+
+.copyright a {
+  display: none
+}
+
+@media(max-width:760px) {
+  .mobile-bottom-nav {
+    height: 102px;
+    border-radius: 42px 42px 0 0;
+    padding: 13px max(20px, env(safe-area-inset-right)) calc(9px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+    overflow: visible;
+    isolation: isolate
+  }
+
+  .mobile-bottom-nav::before {
+    content: '';
+    position: absolute;
+    width: 98px;
+    height: 56px;
+    left: 50%;
+    top: -1px;
+    transform: translateX(-50%);
+    border-radius: 0 0 54px 54px;
+    background: #140d0a;
+    z-index: -1
+  }
+
+  .mobile-bottom-nav a,
+  .mobile-bottom-nav button {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    color: #cfb28c;
+    font-size: 0;
+    border-radius: 50%
+  }
+
+  .mobile-bottom-nav a.active,
+  .mobile-bottom-nav a:hover {
+    color: #e89b55
+  }
+
+  .mobile-bottom-nav .mobile-scan {
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
+    border: 3px solid #dc955a;
+    background: #c77e41;
+    color: #f5f1eb;
+    transform: translateY(-34px);
+    box-shadow: 0 8px 24px #0006
+  }
+
+  .mobile-bottom-nav svg {
+    width: 24px;
+    height: 24px
+  }
+
+  .mobile-bottom-nav .mobile-scan svg {
+    width: 30px;
+    height: 30px
+  }
+
+  .copyright {
+    padding-bottom: 126px
+  }
+}
 
 /* Authentication mirrors the desktop dialog and the dedicated mobile frames. */
-.auth-poster{min-height:720px;padding:75px 45px;position:relative}.auth-poster h1{font-size:46px;line-height:1.42;margin:16px 0}.auth-poster p{color:#d8bc95}.auth-poster img{position:absolute;width:420px;height:420px;object-fit:cover;border-radius:22px;right:20px;top:36px}.auth-backdrop{position:fixed;inset:0;z-index:50;background:#120a08bb;display:grid;place-items:center;padding:24px}.auth-dialog{width:min(468px,100%);min-height:505px;padding:42px 64px 36px;background:#241612;border-bottom:10px solid #d9904d;position:relative;text-align:center;outline:none}.auth-close{position:absolute;right:15px;top:8px;color:#d9904d;font-size:27px;line-height:1}.auth-mobile-wordmark{display:none}.auth-title{display:flex;justify-content:center;align-items:baseline;gap:3px}.auth-title h1{font-size:22px;color:#d9904d;margin:0}.auth-desktop-switch{font-size:20px}.auth-intro{font-size:12px;line-height:16px;color:#cfb28c;margin:28px auto 20px;max-width:310px}.auth-form{padding:0;margin:0;max-width:none;background:transparent;border:0;gap:10px;text-align:left}.auth-form label span{display:none}.auth-form input{height:38px;padding:9px 13px}.auth-form .primary-button{width:100%;margin-top:8px}.forgot-password{display:block;color:#e89b55;text-align:right;font-size:12px}.auth-divider{display:flex;align-items:center;gap:10px;color:#cfb28c;font-size:11px;margin:22px 0 12px}.auth-divider::before,.auth-divider::after{content:'';height:1px;background:#4b3124;flex:1}.auth-provider{width:100%;height:38px;margin:0 0 10px;background:transparent;border:1px solid #4b3124;border-radius:5px;color:#cfb28c;font-size:12px;font-weight:700}.auth-provider:disabled{opacity:.75}.auth-alternate{font-size:12px;color:#cfb28c}.auth-alternate a{color:#e89b55}
+.auth-poster {
+  min-height: 720px;
+  padding: 75px 45px;
+  position: relative
+}
+
+.auth-poster h1 {
+  font-size: 46px;
+  line-height: 1.42;
+  margin: 16px 0
+}
+
+.auth-poster p {
+  color: #d8bc95
+}
+
+.auth-poster img {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 22px;
+  right: 20px;
+  top: 36px
+}
+
+.auth-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: #120a08bb;
+  display: grid;
+  place-items: center;
+  padding: 24px
+}
+
+.auth-dialog {
+  width: min(468px, 100%);
+  min-height: 505px;
+  padding: 42px 64px 36px;
+  background: #241612;
+  border-bottom: 10px solid #d9904d;
+  position: relative;
+  text-align: center;
+  outline: none
+}
+
+.auth-close {
+  position: absolute;
+  right: 15px;
+  top: 8px;
+  color: #d9904d;
+  font-size: 27px;
+  line-height: 1
+}
+
+.auth-mobile-wordmark {
+  display: none
+}
+
+.auth-title {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 3px
+}
+
+.auth-title h1 {
+  font-size: 22px;
+  color: #d9904d;
+  margin: 0
+}
+
+.auth-desktop-switch {
+  font-size: 20px
+}
+
+.auth-intro {
+  font-size: 12px;
+  line-height: 16px;
+  color: #cfb28c;
+  margin: 28px auto 20px;
+  max-width: 310px
+}
+
+.auth-form {
+  padding: 0;
+  margin: 0;
+  max-width: none;
+  background: transparent;
+  border: 0;
+  gap: 10px;
+  text-align: left
+}
+
+.auth-form label span {
+  display: none
+}
+
+.auth-form input {
+  height: 38px;
+  padding: 9px 13px
+}
+
+.auth-form .primary-button {
+  width: 100%;
+  margin-top: 8px
+}
+
+.forgot-password {
+  display: block;
+  color: #e89b55;
+  text-align: right;
+  font-size: 12px
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #cfb28c;
+  font-size: 11px;
+  margin: 22px 0 12px
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  height: 1px;
+  background: #4b3124;
+  flex: 1
+}
+
+.auth-provider {
+  width: 100%;
+  height: 38px;
+  margin: 0 0 10px;
+  background: transparent;
+  border: 1px solid #4b3124;
+  border-radius: 5px;
+  color: #cfb28c;
+  font-size: 12px;
+  font-weight: 700
+}
+
+.auth-provider:disabled {
+  opacity: .75
+}
+
+.auth-alternate {
+  font-size: 12px;
+  color: #cfb28c
+}
+
+.auth-alternate a {
+  color: #e89b55
+}
 
 /* NFT detail gallery and purchase panel. */
-.detail-gallery{display:grid;grid-template-columns:90px minmax(0,1fr);gap:18px}.detail-thumbnails{display:grid;gap:14px;align-content:start}.detail-thumbnails button{width:90px;height:90px;overflow:hidden;border:1px solid transparent;border-radius:7px;padding:3px;background:#241612}.detail-thumbnails button.active{border-color:#d28a4c}.detail-thumbnails img{width:100%;height:100%;object-fit:cover;border-radius:4px}.detail-art{position:relative;border-radius:8px;padding:18px}.detail-art .nft-image{width:100%;height:100%;max-height:none;object-fit:cover}.detail-zoom{position:absolute;right:20px;top:20px;border-radius:50%;background:#241612;padding:5px;width:32px;height:32px}.detail-price-line{display:flex;align-items:center;gap:28px}.detail-price-line span{color:#e89b55;font-size:13px}.detail-information h2{margin:18px 0 9px}.detail-information>p{margin:8px 0}.nft-actions{background:transparent;padding:0;margin:20px 0}.edition-selector{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:#cfb28c;font-size:13px}.edition-selector button{border:1px solid #704632;border-radius:18px;background:transparent;color:#cfb28c;padding:5px 9px;font-size:12px}.edition-selector button.selected{border-color:#d28a4c;color:#e89b55}.quantity-row{display:flex;align-items:center;gap:12px;color:#cfb28c}.quantity-row button{height:36px;width:30px;border:0;border-radius:12px;background:#d28a4c;color:#140d0a;font-size:21px}.quantity-row output{min-width:14px;text-align:center;color:#f5f1eb}.quantity-row strong{margin-left:auto;color:#e89b55;font-size:19px}.nft-actions .primary-button{gap:8px}.favorite-button{display:inline-flex;align-items:center;gap:7px}.detail-mobile-actions{display:none}.detail-description{margin:74px 0 90px;border-top:1px solid #4b3124;padding-top:18px;color:#cfb28c;font-size:14px;line-height:1.7}.detail-description h2{color:#e89b55;font-size:16px}
+.detail-gallery {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 18px
+}
+
+.detail-thumbnails {
+  display: grid;
+  gap: 14px;
+  align-content: start
+}
+
+.detail-thumbnails button {
+  width: 90px;
+  height: 90px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  padding: 3px;
+  background: #241612
+}
+
+.detail-thumbnails button.active {
+  border-color: #d28a4c
+}
+
+.detail-thumbnails img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px
+}
+
+.detail-art {
+  position: relative;
+  border-radius: 8px;
+  padding: 18px
+}
+
+.detail-art .nft-image {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover
+}
+
+.detail-zoom {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  border-radius: 50%;
+  background: #241612;
+  padding: 5px;
+  width: 32px;
+  height: 32px
+}
+
+.detail-price-line {
+  display: flex;
+  align-items: center;
+  gap: 28px
+}
+
+.detail-price-line span {
+  color: #e89b55;
+  font-size: 13px
+}
+
+.detail-information h2 {
+  margin: 18px 0 9px
+}
+
+.detail-information>p {
+  margin: 8px 0
+}
+
+.nft-actions {
+  background: transparent;
+  padding: 0;
+  margin: 20px 0
+}
+
+.edition-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: #cfb28c;
+  font-size: 13px
+}
+
+.edition-selector button {
+  border: 1px solid #704632;
+  border-radius: 18px;
+  background: transparent;
+  color: #cfb28c;
+  padding: 5px 9px;
+  font-size: 12px
+}
+
+.edition-selector button.selected {
+  border-color: #d28a4c;
+  color: #e89b55
+}
+
+.quantity-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #cfb28c
+}
+
+.quantity-row button {
+  height: 36px;
+  width: 30px;
+  border: 0;
+  border-radius: 12px;
+  background: #d28a4c;
+  color: #140d0a;
+  font-size: 21px
+}
+
+.quantity-row output {
+  min-width: 14px;
+  text-align: center;
+  color: #f5f1eb
+}
+
+.quantity-row strong {
+  margin-left: auto;
+  color: #e89b55;
+  font-size: 19px
+}
+
+.nft-actions .primary-button {
+  gap: 8px
+}
+
+.favorite-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px
+}
+
+.detail-mobile-actions {
+  display: none
+}
+
+.detail-description {
+  margin: 74px 0 90px;
+  border-top: 1px solid #4b3124;
+  padding-top: 18px;
+  color: #cfb28c;
+  font-size: 14px;
+  line-height: 1.7
+}
+
+.detail-description h2 {
+  color: #e89b55;
+  font-size: 16px
+}
 
 /* Cart, checkout and receipt retain server-authoritative values in the Figma composition. */
-.page-breadcrumb{font-size:13px;font-weight:700;margin-bottom:14px}.cart-table-head{display:grid;grid-template-columns:minmax(0,1fr) 110px 112px 76px;gap:14px;padding:0 0 10px;border-bottom:1px solid #4b3124;font-size:14px;font-weight:700}.cart-item{display:grid;grid-template-columns:minmax(0,1fr) 110px 112px 76px;gap:14px;border:0;border-radius:0;background:#241612;padding:16px;margin-top:12px}.cart-item>strong{align-self:center;color:#d8bc95}.cart-item label{align-self:center}.cart-item label input{margin-top:6px}.cart-item .secondary-button{align-self:center;padding:7px 8px;font-size:11px}.coupon-form{background:transparent;padding:15px 0}.order-summary{border-radius:0;background:transparent;border-top:1px solid #4b3124;padding:0 0 18px}.order-summary h2{margin:16px 0 22px}.order-summary .primary-button{border-radius:4px}.checkout-form{padding-right:24px}.checkout-form h2{font-size:18px;margin:0}.checkout-form select{min-height:42px}.receipt-overlay{position:fixed;inset:0;z-index:40;background:#0d0807cf;display:grid;place-items:center;padding:24px}.receipt{width:min(620px,100%);max-height:calc(100vh - 48px);overflow:auto;border-bottom:9px solid #d28a4c;border-radius:0;background:#241612;box-shadow:0 20px 80px #000}.receipt h1{color:#e89b55}.receipt .primary-button{margin-top:16px}
-.account-layout{display:grid;grid-template-columns:310px minmax(0,1fr);gap:36px}.account-sidebar{align-self:start;background:#241612;padding:22px 0}.account-sidebar h2{font-size:20px;padding:0 16px;margin:0 0 14px}.account-sidebar a,.account-sidebar span{display:block;min-height:48px;padding:14px 20px;color:#cfb28c;font-size:15px}.account-sidebar a.active{border-left:6px solid #d28a4c;background:#302019;color:#e89b55;padding-left:14px}.account-content h1{font-size:23px}.account-content .account-form{max-width:none;grid-template-columns:repeat(2,minmax(0,1fr));background:transparent;border:0;padding:0}.account-content .account-form h2,.account-content .account-form button,.account-content .account-form label:has(textarea){grid-column:1 / -1}.account-content .cart-item{grid-template-columns:minmax(0,1fr) auto}.account-content .cart-item .secondary-button{grid-column:2}.account-content .cart-item>strong{display:none}
-@media(max-width:760px){.page-breadcrumb,.cart-table-head{display:none}.cart-layout{gap:20px}.cart-item{grid-template-columns:minmax(0,1fr) 82px;gap:8px;padding:14px;border-radius:14px}.cart-item>strong{grid-column:2;grid-row:1}.cart-item label{grid-column:1;grid-row:2;max-width:120px}.cart-item .secondary-button{grid-column:2;grid-row:2}.coupon-form{padding:12px}.order-summary{padding:18px;background:#241612;border-radius:18px}.checkout-form{padding:0}.receipt-overlay{padding:0;place-items:end}.receipt{width:100%;max-height:90vh;border-radius:32px 32px 0 0;padding:30px 24px}.account-layout{display:block}.account-sidebar{display:flex;overflow:auto;padding:0;background:transparent;margin:0 -4px 24px}.account-sidebar h2,.account-sidebar span{display:none}.account-sidebar a{white-space:nowrap;min-height:38px;padding:9px 12px}.account-sidebar a.active{border-left:0;border-bottom:2px solid #d28a4c;padding-left:12px}.account-content .account-form{grid-template-columns:1fr}.account-content .account-form h2,.account-content .account-form button,.account-content .account-form label:has(textarea){grid-column:auto}}
-@media(max-width:760px){.auth-underlay{display:none}.auth-backdrop{position:static;min-height:100vh;background:#140d0a;padding:0;display:block}.auth-dialog{width:100%;min-height:100vh;padding:130px 56px 45px;background:#140d0a;border:0}.auth-close,.auth-desktop-switch,.auth-intro{display:none}.auth-mobile-wordmark{display:block;text-align:center;font-size:44px;letter-spacing:.12em;margin:0 0 140px}.auth-title h1{font-size:36px;color:#f5f1eb;margin-bottom:72px}.auth-form input{height:74px;border-radius:18px;font-size:18px;padding:16px 32px}.auth-form .primary-button{height:90px;border-radius:20px;font-size:22px;margin-top:54px}.forgot-password{font-size:18px;margin-top:18px}.auth-divider{font-size:16px;margin:70px 0 22px}.auth-provider{height:80px;font-size:18px;margin-bottom:18px}.auth-alternate{margin-top:74px;font-size:17px}.detail-breadcrumb,.detail-thumbnails{display:none}.detail-mobile-actions{display:flex;justify-content:space-between;position:absolute;z-index:2;left:0;right:0;top:28px;padding:0 8px}.detail-mobile-actions a{width:58px;height:58px;display:grid;place-items:center;border-radius:50%;border:1px solid #4b3124;background:#241612;color:#e89b55;font-size:42px}.detail-mobile-actions a svg{width:28px;height:28px}.detail-layout{margin-top:0}.detail-gallery{display:block}.detail-art{padding:0;height:650px;max-height:78vh;background:transparent;border-radius:0}.detail-art .nft-image{border-radius:0 0 32px 32px}.detail-zoom{display:none}.detail-information{position:relative;margin-top:-34px;padding:48px 24px 22px;background:#241612;border-radius:36px 36px 0 0}.detail-information h1{font-size:31px}.detail-information>p{font-size:15px;line-height:1.65}.detail-price-line{position:absolute;right:22px;top:74px}.detail-price-line .detail-price{display:none}.detail-price-line span{border:1px solid #d28a4c;border-radius:20px;padding:5px 9px}.edition-selector{font-size:18px}.edition-selector button{font-size:16px}.quantity-row{margin:36px -24px -22px;padding:24px;background:#1d110e;border-radius:32px 32px 0 0}.quantity-row strong{font-size:28px}.nft-actions>div:last-of-type{padding:20px 0 0}.nft-actions .primary-button{width:calc(100% - 88px);height:76px;border-radius:40px;font-size:20px}.favorite-button{width:72px;height:72px;padding:0;justify-content:center;border-radius:50%;font-size:0}.favorite-button svg{width:28px;height:28px}.detail-description{display:none}}
+.page-breadcrumb {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 14px
+}
+
+.cart-table-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 110px 112px 76px;
+  gap: 14px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid #4b3124;
+  font-size: 14px;
+  font-weight: 700
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 110px 112px 76px;
+  gap: 14px;
+  border: 0;
+  border-radius: 0;
+  background: #241612;
+  padding: 16px;
+  margin-top: 12px
+}
+
+.cart-item>strong {
+  align-self: center;
+  color: #d8bc95
+}
+
+.cart-item label {
+  align-self: center
+}
+
+.cart-item label input {
+  margin-top: 6px
+}
+
+.cart-item .secondary-button {
+  align-self: center;
+  padding: 7px 8px;
+  font-size: 11px
+}
+
+.coupon-form {
+  background: transparent;
+  padding: 15px 0
+}
+
+.order-summary {
+  border-radius: 0;
+  background: transparent;
+  border-top: 1px solid #4b3124;
+  padding: 0 0 18px
+}
+
+.order-summary h2 {
+  margin: 16px 0 22px
+}
+
+.order-summary .primary-button {
+  border-radius: 4px
+}
+
+.checkout-form {
+  padding-right: 24px
+}
+
+.checkout-form h2 {
+  font-size: 18px;
+  margin: 0
+}
+
+.checkout-form select {
+  min-height: 42px
+}
+
+.receipt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: #0d0807cf;
+  display: grid;
+  place-items: center;
+  padding: 24px
+}
+
+.receipt {
+  width: min(620px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+  border-bottom: 9px solid #d28a4c;
+  border-radius: 0;
+  background: #241612;
+  box-shadow: 0 20px 80px #000
+}
+
+.receipt h1 {
+  color: #e89b55
+}
+
+.receipt .primary-button {
+  margin-top: 16px
+}
+
+.account-layout {
+  display: grid;
+  grid-template-columns: 310px minmax(0, 1fr);
+  gap: 36px
+}
+
+.account-sidebar {
+  align-self: start;
+  background: #241612;
+  padding: 22px 0
+}
+
+.account-sidebar h2 {
+  font-size: 20px;
+  padding: 0 16px;
+  margin: 0 0 14px
+}
+
+.account-sidebar a,
+.account-sidebar span {
+  display: block;
+  min-height: 48px;
+  padding: 14px 20px;
+  color: #cfb28c;
+  font-size: 15px
+}
+
+.account-sidebar a.active {
+  border-left: 6px solid #d28a4c;
+  background: #302019;
+  color: #e89b55;
+  padding-left: 14px
+}
+
+.account-content h1 {
+  font-size: 23px
+}
+
+.account-content .account-form {
+  max-width: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  background: transparent;
+  border: 0;
+  padding: 0
+}
+
+.account-content .account-form h2,
+.account-content .account-form button,
+.account-content .account-form label:has(textarea) {
+  grid-column: 1 / -1
+}
+
+.account-content .cart-item {
+  grid-template-columns: minmax(0, 1fr) auto
+}
+
+.account-content .cart-item .secondary-button {
+  grid-column: 2
+}
+
+.account-content .cart-item>strong {
+  display: none
+}
+
+@media(max-width:760px) {
+
+  .page-breadcrumb,
+  .cart-table-head {
+    display: none
+  }
+
+  .cart-layout {
+    gap: 20px
+  }
+
+  .cart-item {
+    grid-template-columns: minmax(0, 1fr) 82px;
+    gap: 8px;
+    padding: 14px;
+    border-radius: 14px
+  }
+
+  .cart-item>strong {
+    grid-column: 2;
+    grid-row: 1
+  }
+
+  .cart-item label {
+    grid-column: 1;
+    grid-row: 2;
+    max-width: 120px
+  }
+
+  .cart-item .secondary-button {
+    grid-column: 2;
+    grid-row: 2
+  }
+
+  .coupon-form {
+    padding: 12px
+  }
+
+  .order-summary {
+    padding: 18px;
+    background: #241612;
+    border-radius: 18px
+  }
+
+  .checkout-form {
+    padding: 0
+  }
+
+  .receipt-overlay {
+    padding: 0;
+    place-items: end
+  }
+
+  .receipt {
+    width: 100%;
+    max-height: 90vh;
+    border-radius: 32px 32px 0 0;
+    padding: 30px 24px
+  }
+
+  .account-layout {
+    display: block
+  }
+
+  .account-sidebar {
+    display: flex;
+    overflow: auto;
+    padding: 0;
+    background: transparent;
+    margin: 0 -4px 24px
+  }
+
+  .account-sidebar h2,
+  .account-sidebar span {
+    display: none
+  }
+
+  .account-sidebar a {
+    white-space: nowrap;
+    min-height: 38px;
+    padding: 9px 12px
+  }
+
+  .account-sidebar a.active {
+    border-left: 0;
+    border-bottom: 2px solid #d28a4c;
+    padding-left: 12px
+  }
+
+  .account-content .account-form {
+    grid-template-columns: 1fr
+  }
+
+  .account-content .account-form h2,
+  .account-content .account-form button,
+  .account-content .account-form label:has(textarea) {
+    grid-column: auto
+  }
+}
+
+@media(max-width:760px) {
+  .auth-underlay {
+    display: none
+  }
+
+  .auth-backdrop {
+    position: static;
+    min-height: 100vh;
+    background: #140d0a;
+    padding: 0;
+    display: block
+  }
+
+  .auth-dialog {
+    width: 100%;
+    min-height: 100vh;
+    padding: 130px 56px 45px;
+    background: #140d0a;
+    border: 0
+  }
+
+  .auth-close,
+  .auth-desktop-switch,
+  .auth-intro {
+    display: none
+  }
+
+  .auth-mobile-wordmark {
+    display: block;
+    text-align: center;
+    font-size: 44px;
+    letter-spacing: .12em;
+    margin: 0 0 140px
+  }
+
+  .auth-title h1 {
+    font-size: 36px;
+    color: #f5f1eb;
+    margin-bottom: 72px
+  }
+
+  .auth-form input {
+    height: 74px;
+    border-radius: 18px;
+    font-size: 18px;
+    padding: 16px 32px
+  }
+
+  .auth-form .primary-button {
+    height: 90px;
+    border-radius: 20px;
+    font-size: 22px;
+    margin-top: 54px
+  }
+
+  .forgot-password {
+    font-size: 18px;
+    margin-top: 18px
+  }
+
+  .auth-divider {
+    font-size: 16px;
+    margin: 70px 0 22px
+  }
+
+  .auth-provider {
+    height: 80px;
+    font-size: 18px;
+    margin-bottom: 18px
+  }
+
+  .auth-alternate {
+    margin-top: 74px;
+    font-size: 17px
+  }
+
+  .detail-breadcrumb,
+  .detail-thumbnails {
+    display: none
+  }
+
+  .detail-mobile-actions {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    top: 28px;
+    padding: 0 8px
+  }
+
+  .detail-mobile-actions a {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid #4b3124;
+    background: #241612;
+    color: #e89b55;
+    font-size: 42px
+  }
+
+  .detail-mobile-actions a svg {
+    width: 28px;
+    height: 28px
+  }
+
+  .detail-layout {
+    margin-top: 0
+  }
+
+  .detail-gallery {
+    display: block
+  }
+
+  .detail-art {
+    padding: 0;
+    height: 650px;
+    max-height: 78vh;
+    background: transparent;
+    border-radius: 0
+  }
+
+  .detail-art .nft-image {
+    border-radius: 0 0 32px 32px
+  }
+
+  .detail-zoom {
+    display: none
+  }
+
+  .detail-information {
+    position: relative;
+    margin-top: -34px;
+    padding: 48px 24px 22px;
+    background: #241612;
+    border-radius: 36px 36px 0 0
+  }
+
+  .detail-information h1 {
+    font-size: 31px
+  }
+
+  .detail-information>p {
+    font-size: 15px;
+    line-height: 1.65
+  }
+
+  .detail-price-line {
+    position: absolute;
+    right: 22px;
+    top: 74px
+  }
+
+  .detail-price-line .detail-price {
+    display: none
+  }
+
+  .detail-price-line span {
+    border: 1px solid #d28a4c;
+    border-radius: 20px;
+    padding: 5px 9px
+  }
+
+  .edition-selector {
+    font-size: 18px
+  }
+
+  .edition-selector button {
+    font-size: 16px
+  }
+
+  .quantity-row {
+    margin: 36px -24px -22px;
+    padding: 24px;
+    background: #1d110e;
+    border-radius: 32px 32px 0 0
+  }
+
+  .quantity-row strong {
+    font-size: 28px
+  }
+
+  .nft-actions>div:last-of-type {
+    padding: 20px 0 0
+  }
+
+  .nft-actions .primary-button {
+    width: calc(100% - 88px);
+    height: 76px;
+    border-radius: 40px;
+    font-size: 20px
+  }
+
+  .favorite-button {
+    width: 72px;
+    height: 72px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0
+  }
+
+  .favorite-button svg {
+    width: 28px;
+    height: 28px
+  }
+
+  .detail-description {
+    display: none
+  }
+}
 
 /* Functional marketplace flows share the existing Kurio palette without changing the Figma-led catalog. */
-.header-logout,.secondary-button{border:1px solid #8c5b3b;background:transparent;color:#f5f1eb;border-radius:6px;padding:8px 12px;font-size:13px}.header-logout{padding:4px 8px}.account-page{max-width:900px;margin:46px auto 90px}.account-page h1{font-size:32px;margin:0 0 14px}.account-page>p{color:#cfb28c}.account-form{display:grid;gap:14px;max-width:520px;margin:26px 0;padding:24px;background:#241612;border:1px solid #4b3124;border-radius:8px}.account-form label,.checkout-form label,.nft-actions label{display:grid;gap:7px;color:#cfb28c;font-size:13px}.account-form input,.account-form textarea,.account-form select,.checkout-form select,.nft-actions input,.nft-actions select,.coupon-form input{width:100%;background:#140d0a;color:#f5f1eb;border:1px solid #6d482d;border-radius:5px;padding:10px}.account-form textarea{min-height:90px;resize:vertical}.form-error{color:#ffb4a7}.cart-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px}.cart-items,.checkout-form{display:grid;gap:16px}.cart-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px;background:#241612;border:1px solid #4b3124;border-radius:8px}.cart-item h2{font-size:17px;margin:0 0 7px}.cart-item p{font-size:13px;color:#cfb28c;margin:4px 0}.cart-item label{max-width:110px;color:#cfb28c;font-size:12px}.order-summary{align-self:start;padding:20px;background:#382319;border-radius:8px}.order-summary h2{font-size:20px;margin-top:0}.order-summary p{display:flex;justify-content:space-between;gap:12px;color:#cfb28c;font-size:13px}.order-total{font-size:16px!important;color:#f5f1eb!important}.order-summary .primary-button{width:100%;margin-top:12px}.coupon-form{display:flex;align-items:end;gap:10px;flex-wrap:wrap;padding:18px;background:#241612}.coupon-form label{flex:1;min-width:180px;color:#cfb28c;font-size:13px}.nft-actions{display:grid;gap:14px;margin:20px 0;padding:18px;background:#241612;border-radius:8px}.nft-actions>div{display:flex;gap:10px;flex-wrap:wrap}.mutation-notice{color:#e89b55;font-size:13px}.receipt{max-width:620px;padding:28px;background:#241612;border-radius:8px}.receipt h1{margin-top:0}.receipt p{color:#cfb28c}.checkout-form .primary-button{margin-top:10px;width:max-content}
-.mobile-account-navigation{display:none}
-@media(max-width:760px){.mobile-account-navigation{position:relative;z-index:10;min-height:48px;padding-top:16px;display:flex;align-items:center;justify-content:flex-end;gap:12px;font-size:12px;color:#cfb28c}.mobile-account-navigation a:first-child{margin-right:auto;color:#f5f1eb;font-weight:700;letter-spacing:.12em}.mobile-account-navigation button{position:relative;z-index:1;border:0;background:none;color:#e89b55;padding:0;font-size:12px}.account-page{margin:30px auto 120px}.account-page h1{font-size:26px}.cart-layout{grid-template-columns:1fr}.cart-item{align-items:flex-start;flex-direction:column}.cart-item label{max-width:100%;width:100%}.store-actions{gap:6px}.store-nav{display:none}.store-cart-symbol{font-size:11px}.header-logout{font-size:11px}.nft-actions{padding:14px}}
+.header-logout,
+.secondary-button {
+  border: 1px solid #8c5b3b;
+  background: transparent;
+  color: #f5f1eb;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px
+}
+
+.header-logout {
+  padding: 4px 8px
+}
+
+.account-page {
+  max-width: 900px;
+  margin: 46px auto 90px
+}
+
+.account-page h1 {
+  font-size: 32px;
+  margin: 0 0 14px
+}
+
+.account-page>p {
+  color: #cfb28c
+}
+
+.account-form {
+  display: grid;
+  gap: 14px;
+  max-width: 520px;
+  margin: 26px 0;
+  padding: 24px;
+  background: #241612;
+  border: 1px solid #4b3124;
+  border-radius: 8px
+}
+
+.account-form label,
+.checkout-form label,
+.nft-actions label {
+  display: grid;
+  gap: 7px;
+  color: #cfb28c;
+  font-size: 13px
+}
+
+.account-form input,
+.account-form textarea,
+.account-form select,
+.checkout-form select,
+.nft-actions input,
+.nft-actions select,
+.coupon-form input {
+  width: 100%;
+  background: #140d0a;
+  color: #f5f1eb;
+  border: 1px solid #6d482d;
+  border-radius: 5px;
+  padding: 10px
+}
+
+.account-form textarea {
+  min-height: 90px;
+  resize: vertical
+}
+
+.form-error {
+  color: #ffb4a7
+}
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 28px
+}
+
+.cart-items,
+.checkout-form {
+  display: grid;
+  gap: 16px
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px;
+  background: #241612;
+  border: 1px solid #4b3124;
+  border-radius: 8px
+}
+
+.cart-item h2 {
+  font-size: 17px;
+  margin: 0 0 7px
+}
+
+.cart-item p {
+  font-size: 13px;
+  color: #cfb28c;
+  margin: 4px 0
+}
+
+.cart-item label {
+  max-width: 110px;
+  color: #cfb28c;
+  font-size: 12px
+}
+
+.order-summary {
+  align-self: start;
+  padding: 20px;
+  background: #382319;
+  border-radius: 8px
+}
+
+.order-summary h2 {
+  font-size: 20px;
+  margin-top: 0
+}
+
+.order-summary p {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #cfb28c;
+  font-size: 13px
+}
+
+.order-total {
+  font-size: 16px !important;
+  color: #f5f1eb !important
+}
+
+.order-summary .primary-button {
+  width: 100%;
+  margin-top: 12px
+}
+
+.coupon-form {
+  display: flex;
+  align-items: end;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 18px;
+  background: #241612
+}
+
+.coupon-form label {
+  flex: 1;
+  min-width: 180px;
+  color: #cfb28c;
+  font-size: 13px
+}
+
+.nft-actions {
+  display: grid;
+  gap: 14px;
+  margin: 20px 0;
+  padding: 18px;
+  background: #241612;
+  border-radius: 8px
+}
+
+.nft-actions>div {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap
+}
+
+.mutation-notice {
+  color: #e89b55;
+  font-size: 13px
+}
+
+.receipt {
+  max-width: 620px;
+  padding: 28px;
+  background: #241612;
+  border-radius: 8px
+}
+
+.receipt h1 {
+  margin-top: 0
+}
+
+.receipt p {
+  color: #cfb28c
+}
+
+.checkout-form .primary-button {
+  margin-top: 10px;
+  width: max-content
+}
+
+.mobile-account-navigation {
+  display: none
+}
+
+@media(max-width:760px) {
+  .mobile-account-navigation {
+    position: relative;
+    z-index: 10;
+    min-height: 48px;
+    padding-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    font-size: 12px;
+    color: #cfb28c
+  }
+
+  .mobile-account-navigation a:first-child {
+    margin-right: auto;
+    color: #f5f1eb;
+    font-weight: 700;
+    letter-spacing: .12em
+  }
+
+  .mobile-account-navigation button {
+    position: relative;
+    z-index: 1;
+    border: 0;
+    background: none;
+    color: #e89b55;
+    padding: 0;
+    font-size: 12px
+  }
+
+  .account-page {
+    margin: 30px auto 120px
+  }
+
+  .account-page h1 {
+    font-size: 26px
+  }
+
+  .cart-layout {
+    grid-template-columns: 1fr
+  }
+
+  .cart-item {
+    align-items: flex-start;
+    flex-direction: column
+  }
+
+  .cart-item label {
+    max-width: 100%;
+    width: 100%
+  }
+
+  .store-actions {
+    gap: 6px
+  }
+
+  .store-nav {
+    display: none
+  }
+
+  .store-cart-symbol {
+    font-size: 11px
+  }
+
+  .header-logout {
+    font-size: 11px
+  }
+
+  .nft-actions {
+    padding: 14px
+  }
+}

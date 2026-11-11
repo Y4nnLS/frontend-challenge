@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import type { NftListParams, NftSort } from '@/api/contracts/marketplace'
-import { SearchIcon, SlidersIcon } from '@/shared/components/icons'
+import { FacebookIcon, InstagramIcon, LinkedInIcon, SearchIcon, SlidersIcon, XIcon, YoutubeIcon } from '@/shared/components/icons'
 import { MarketplaceHeader } from '@/shared/components/marketplace-header'
 import { MobileBottomNavigation } from '@/shared/components/mobile-bottom-navigation'
 import { NftCard, NftCardSkeleton } from '@/catalog/components/nft-card'
@@ -51,10 +51,18 @@ const articles = [
   { image: 'artwork-03.png', date: '15 de setembro | Leitura de 2 min', title: 'Como proteger sua carteira', description: 'Proteja sua carteira, seus ativos e sua identidade.' },
 ]
 
+function FooterSocialLinks() {
+  return <div className="social-icons" aria-label="Redes sociais indisponíveis nesta demonstração">
+    <span title="Facebook indisponível"><FacebookIcon size={17}/></span><span title="Instagram indisponível"><InstagramIcon size={17}/></span><span title="X indisponível"><XIcon size={17}/></span><span title="LinkedIn indisponível"><LinkedInIcon size={17}/></span><span title="YouTube indisponível"><YoutubeIcon size={17}/></span>
+  </div>
+}
+
 function PriceFilter({ defaultValue, onApply }: { defaultValue: number; onApply: (value: number) => void }) {
   const [priceMax, setPriceMax] = useState(defaultValue)
+  const sliderMaximum = 20
+  const percent = ((priceMax - 0.02) / (sliderMaximum - 0.02)) * 100
 
-  return <div className="filter-fieldset price-filter"><h3>Faixa de preço</h3><input className="price-range-input" type="range" min="0.02" max="12.30" step="0.01" value={priceMax} onChange={e => setPriceMax(Number(e.target.value))} aria-label="Preço máximo em ETH"/><p>Preço: 0,02 - {priceMax.toFixed(2).replace('.', ',')} ETH</p><button type="button" className="filter-apply" onClick={() => onApply(priceMax)}>Aplicar</button></div>
+  return <div className="filter-fieldset price-filter"><h3>Faixa de preço</h3><div className="price-slider"><div className="price-slider-track" aria-hidden="true"><span style={{ width: `${percent}%` }}/><i className="price-slider-min"/><i className="price-slider-max" style={{ left: `${percent}%` }}/></div><input className="price-range-input" type="range" min="0.02" max={sliderMaximum} step="0.01" value={priceMax} onChange={e => setPriceMax(Number(e.target.value))} aria-label="Preço máximo em ETH"/></div><p>Preço: 0,02 - {priceMax.toFixed(2).replace('.', ',')} ETH</p><button type="button" className="filter-apply" onClick={() => onApply(priceMax)}>Aplicar</button></div>
 }
 
 function HomePage() {
@@ -110,7 +118,7 @@ function HomePage() {
               })}
               {search.category && <button type="button" className="clear-category" onClick={() => changeSearch({ category: undefined })}>Todas as coleções</button>}
             </fieldset>
-            <PriceFilter key={search.maxPriceEth ?? '12.30'} defaultValue={Number(search.maxPriceEth ?? '12.30')} onApply={priceMax => changeSearch({ maxPriceEth: priceMax >= 12.3 ? undefined : priceMax.toFixed(2) })}/>
+            <PriceFilter key={search.maxPriceEth ?? '12.30'} defaultValue={Number(search.maxPriceEth ?? '12.30')} onApply={priceMax => changeSearch({ maxPriceEth: priceMax >= 20 ? undefined : priceMax.toFixed(2) })}/>
             <div className="filter-fieldset network-filter"><h3>Rede</h3>{[['Ethereum', 119], ['Polygon', 78], ['Solana', 86]].map(([name,count]) => <div key={name} className="filter-option filter-option-static"><span>{name}</span><span>({count})</span></div>)}</div>
             <div className="mobile-sort-filter"><label htmlFor="mobile-sort">Ordenar catálogo no celular</label><select id="mobile-sort" aria-label="Ordenar catálogo no celular" value={search.sort ?? 'recent'} onChange={e => changeSearch({ sort: e.target.value === 'recent' ? undefined : e.target.value as NftSort })}>{sorts.map(item=><option key={item.id} value={item.id}>{item.label}</option>)}</select></div>
             <label className="availability-option"><input type="checkbox" checked={Boolean(search.available)} onChange={e => changeSearch({ available: e.target.checked || undefined })}/>Somente disponíveis</label>
@@ -146,9 +154,9 @@ function HomePage() {
       </section>
       <section className="journal" id="diario" aria-label="Diário da Cunhagem"><h2>Diário da Cunhagem</h2><p>Histórias, guias e insights para colecionadores sobre o universo da propriedade digital.</p><div className="journal-grid">{articles.map(article=><article className="journal-card" key={article.title}><img src={`/assets/figma/${article.image}`} alt="Arte digital" loading="lazy"/><div><span>{article.date}</span><h3>{article.title}</h3><p>{article.description}</p><span className="journal-read">Ler mais →</span></div></article>)}</div></section>
       <footer className="store-footer">
-        <div className="footer-benefits"><div><span className="benefit-icon">W</span><h3>Segurança da carteira</h3><p>Proteja sua carteira e colecione arte digital verificada com confiança.</p></div><div><span className="benefit-icon">C</span><h3>Criadores em destaque</h3><p>Conheça artistas, estúdios e comunidades que moldam a cultura digital na rede.</p></div><div><span className="benefit-icon">D</span><h3>Alertas de lançamentos</h3><p>Receba calendários de cunhagem, novidades de listas de acesso e análises do mercado.</p></div><div className="newsletter"><h3>Antecipe-se ao próximo lançamento</h3><form onSubmit={e=>e.preventDefault()}><input type="email" placeholder="Digite seu e-mail..." aria-label="E-mail para novidades"/><button type="submit" disabled aria-label="Enviar — cadastro para novidades indisponível">Enviar</button></form><p>Receba lançamentos selecionados, histórias de criadores e novidades do mercado.</p></div></div>
+        <div className="footer-benefits"><div><span className="benefit-icon">W</span><h3>Segurança da carteira</h3><p>Proteja sua carteira e colecione arte digital verificada com confiança.</p></div><div><span className="benefit-icon">C</span><h3>Criadores em destaque</h3><p>Conheça artistas, estúdios e comunidades que moldam a cultura digital na rede.</p></div><div><span className="benefit-icon">D</span><h3>Alertas de lançamentos</h3><p>Receba calendários de cunhagem, novidades de listas de acesso e análises do mercado.</p></div><div className="newsletter"><h3>Antecipe-se ao próximo lançamento</h3><form onSubmit={e=>e.preventDefault()}><input type="email" placeholder="Digite seu e-mail..." aria-label="Cadastro para novidades"/><button type="submit" disabled aria-label="Enviar — cadastro para novidades indisponível">Enviar</button></form><p>Receba lançamentos selecionados, histórias de criadores e novidades do mercado.</p></div></div>
         <div className="footer-contact"><strong>KURIO</strong><span>Feito para colecionadores,<br/>criadores e cultura</span><span>contato@email.com</span><span>+55 11 4002 8922</span></div>
-        <div className="footer-columns"><div><h3>Meu perfil</h3><p>Meu perfil</p><p>Minha coleção</p><p>Atividade</p><p>Estúdio do criador</p><p>Lista de interesses</p></div><div><h3>Central de ajuda</h3><p>Central de ajuda</p><p>Como comprar NFTs</p><p>Carteiras e segurança</p><p>Política do mercado</p><p>Denunciar item</p></div><div><h3>Coleções</h3><p>Arte digital</p><p>Fotografia</p><p>Música</p><p>Arte 3D</p><p>Utilidade</p></div><div><h3>Redes sociais</h3><p className="social-icons">f ◎ 𝕏 in ◎</p><h3>Carteiras compatíveis</h3><p className="wallet-labels">METAMASK · WALLETCONNECT · COINBASE</p></div></div>
+        <div className="footer-columns"><div><h3>Meu perfil</h3><p>Meu perfil</p><p>Minha coleção</p><p>Atividade</p><p>Estúdio do criador</p><p>Lista de interesses</p></div><div><h3>Central de ajuda</h3><p>Central de ajuda</p><p>Como comprar NFTs</p><p>Carteiras e segurança</p><p>Política do mercado</p><p>Denunciar item</p></div><div><h3>Coleções</h3><p>Arte digital</p><p>Fotografia</p><p>Música</p><p>Arte 3D</p><p>Utilidade</p></div><div className="footer-community"><h3>Redes sociais</h3><FooterSocialLinks/><h3>Carteiras compatíveis</h3><div className="wallet-labels"><span>METAMASK</span><span>WALLETCONNECT</span><span>COINBASE</span></div></div></div>
         <div className="copyright">© 2026 Kurio. Propriedade digital para todos. <a href="/validation">Diagnóstico técnico</a></div>
       </footer>
     </div>

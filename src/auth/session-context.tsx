@@ -33,7 +33,9 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   })
   const setSession = useCallback(async (session: Session) => {
     queryClient.setQueryData(['session'], session)
-    await marketplaceApi.mergeGuestCart(localStorage.getItem('jungle-guest-cart-id') ?? '')
+    const guestCartId = localStorage.getItem('jungle-guest-cart-id') || crypto.randomUUID()
+    localStorage.setItem('jungle-guest-cart-id', guestCartId)
+    await marketplaceApi.mergeGuestCart(guestCartId)
     await queryClient.invalidateQueries({ predicate: (query) => query.queryKey[0] === privatePrefix })
     return session
   }, [queryClient])

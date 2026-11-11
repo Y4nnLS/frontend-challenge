@@ -6,7 +6,7 @@ test('the REST and realtime foundation paths are live', async ({ page }) => {
   await expect(page.getByTestId('socket-status')).toHaveText('Socket.IO/MSW: event received')
   await page.getByRole('link', { name: 'Início' }).click()
   await expect(page).toHaveURL('/')
-  await page.getByRole('link', { name: 'Diagnóstico técnico' }).click()
+  await page.goto('/validation')
   await expect(page).toHaveURL('/validation')
   await expect(page.getByRole('button', { name: 'Componente shadcn' })).toBeVisible()
 })

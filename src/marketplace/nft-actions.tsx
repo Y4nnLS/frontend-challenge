@@ -22,7 +22,7 @@ export function NftActions({ nft }: { nft: Nft }) {
   })
   const cartMutation = useMutation({
     mutationFn: () => marketplaceApi.setCartItem({ nftId: nft.id, editionId, quantity }),
-    onSuccess: async (cart) => { if (session) queryClient.setQueryData(privateKey(session.user.id, 'cart'), cart); setNotice('NFT adicionado ao carrinho.') },
+    onSuccess: async (cart) => { if (session) queryClient.setQueryData(privateKey(session.user.id, 'cart'), cart); else queryClient.setQueryData(['guest-cart'], cart); setNotice('NFT adicionado ao carrinho.') },
     onError: (error) => setNotice(apiErrorMessage(error)),
   })
   const toggleFavorite = () => { if (!session) { void navigate({ to: '/login', search: { returnTo: location.pathname } }); return }; favoriteMutation.mutate() }
