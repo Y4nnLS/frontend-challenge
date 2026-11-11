@@ -1,6 +1,6 @@
 # Architecture
 
-Status: initial decision set; revise only when implementation evidence requires it.
+Status: functional foundation implemented; final Figma visual fidelity remains pending.
 
 ## Build and routing
 - React + TypeScript + Vite.
@@ -144,3 +144,41 @@ Visual baselines: home, NFT detail, cart, checkout.
 Deploy an optimized Vite SPA with history fallback.
 Mocks and Socket.IO simulation must work in the public build.
 Direct route access and refresh must resolve correctly.
+
+## Cycle 1 mock API implementation
+
+### Contracts and transport
+- `src/api/contracts/marketplace.ts` is the shared transport-contract module
+  for NFTs/editions, list parameters/pages, sessions, profiles, wallets,
+  favorites, carts, coupons, quotes, orders/receipts and realtime envelopes.
+- `src/api/marketplace-api.ts` is the feature-facing REST client and uses the
+  central Axios instance. ETH values stay 18-place decimal strings; `decimal.js`
+  is used by `src/shared/lib/money.ts` rather than JavaScript float arithmetic.
+
+### Mock store and business policy
+- `MockDatabase` is the single MSW source of truth: six varied NFTs, two users,
+  profiles, wallets, favorites, carts, quotes, orders and sessions live in one
+  coherent state object. Browser localStorage persistence restores refreshes;
+  reset restores the deterministic fixture exactly.
+- Password fixture material is a non-production derived string, never plaintext.
+  Private records are keyed by session user id; guest carts use `guest:<id>`.
+- Quotes recompute current catalog data and carry a fingerprint, exact totals and
+  a five-minute validity. `Idempotency-Key` stores a canonical payload
+  fingerprint. Equal retries recover one order; differing payloads return 409.
+  Timeout-after-create persists before the simulated lost response. Receipts are
+  immutable copies. Confirmed orders decrement stock/remove purchased quantities;
+  declined orders preserve carts.
+
+### REST, scenarios and realtime
+- MSW implements `/api/auth`, `/api/nfts`, `/api/favorites`, `/api/cart`,
+  `/api/coupons/validate`, `/api/quotes`, `/api/orders`, `/api/profile` and
+  `/api/wallets`, with 401/404/409/422 and simulated network/500 responses.
+- Development/E2E-only mock controls provide reset, scenario patching, fixture
+  sessions and catalog mutations. Scenarios cover empty data, latency, network
+  and HTTP failures, expired session, registration conflict, coupons, catalog
+  changes, pending/confirmed/declined orders and timeout recovery.
+- Database mutations emit typed, versioned `nft.updated` and user-scoped
+  `order.updated` through the existing `socket.io-client`/MSW binding. The
+  `RealtimeEventGate` ignores duplicate ids and stale versions; subscriptions
+  clean up listeners and request REST reconciliation after reconnect. Binding
+  support remains limited to its default namespace/client event subset.

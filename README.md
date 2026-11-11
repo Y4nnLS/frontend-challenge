@@ -260,3 +260,34 @@ Documente os contratos REST e eventos, a política de sessão, o estado do carri
 Disponibilize comandos para desenvolvimento com mocks, build, preview, verificação de tipos, lint, testes Playwright e auditoria Lighthouse.
 
 A entrega deve executar a partir de um checkout limpo, sem depender de serviços privados ou do backend de produção.
+
+## Execução local
+
+```bash
+npm ci
+npm run dev
+```
+
+Os mocks MSW são ativados por padrão, inclusive no build de demonstração. Para desativá-los contra uma API compatível, use `VITE_ENABLE_MSW=false` e configure `VITE_API_BASE_URL`.
+
+Credenciais fictícias: `ana@jungle.test` / `Jungle#123` e `bruno@jungle.test` / `Jungle#456`.
+
+```bash
+npm run typecheck
+npm run lint
+npm run test
+npm run test:e2e
+npm run build
+npm run preview
+```
+
+Para auditar o bundle de produção, inicie `npm run preview` em outra janela e execute, por exemplo:
+
+```bash
+npm run lighthouse -- http://127.0.0.1:4173/ --output-path=reports/lighthouse/local-home
+npm run lighthouse:desktop -- http://127.0.0.1:4173/ --output-path=reports/lighthouse/local-home-desktop
+```
+
+O primeiro comando usa o perfil mobile e o segundo o desktop. Use três execuções por rota/perfil e registre a mediana. As configurações estão em `lighthouse.config.js` e `lighthouse.desktop.config.js`; os resultados da entrega local de 2026-11-11 estão em `docs/LIGHTHOUSE-2026-11-11.md`.
+
+Use `POST /api/__mock/reset` para restaurar dados de desenvolvimento/E2E e `PATCH /api/__mock/scenario` para configurar latência, falhas, cupom, preço/estoque e resultado do pedido. O deploy Vercel usa o build padrão e o fallback SPA em `vercel.json`.
