@@ -4,8 +4,6 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { RouterProvider } from '@tanstack/react-router'
 
 import '@/app/styles.css'
-import { queryClient } from '@/app/query-client'
-import { router } from '@/app/router'
 
 async function enableMocking() {
   if (import.meta.env.VITE_ENABLE_MSW === 'false') {
@@ -19,7 +17,15 @@ async function enableMocking() {
   })
 }
 
-void enableMocking().then(() => {
+async function startApplication() {
+  await enableMocking()
+
+  // Socket.IO captures the browser WebSocket constructor while its modules
+  // load. Load the routed application only after MSW has patched it.
+  const [{ queryClient }, { router }] = await Promise.all([
+    import('@/app/query-client'),
+    import('@/app/router'),
+  ])
   const rootElement = document.getElementById('root')
 
   if (!rootElement) {
@@ -33,4 +39,6 @@ void enableMocking().then(() => {
       </QueryClientProvider>
     </StrictMode>,
   )
-})
+}
+
+void startApplication()
