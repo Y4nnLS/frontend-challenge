@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import type { NftListParams, NftSort } from '@/api/contracts/marketplace'
-import { SearchIcon } from '@/catalog/components/store-header'
+import { SearchIcon, SlidersIcon } from '@/shared/components/icons'
 import { MarketplaceHeader } from '@/shared/components/marketplace-header'
+import { MobileBottomNavigation } from '@/shared/components/mobile-bottom-navigation'
 import { NftCard, NftCardSkeleton } from '@/catalog/components/nft-card'
 import { useCatalog } from '@/catalog/queries/use-catalog'
 
@@ -81,7 +82,7 @@ function HomePage() {
       <div className="mobile-search-bar">
         <label className="mobile-search-field"><SearchIcon/><span className="sr-only">Buscar NFTs</span><input aria-label="Buscar NFTs" value={search.query ?? ''} onChange={e => changeQuery(e.target.value)} placeholder="Explorar coleções" /></label>
         <button className="mobile-filter-button" type="button" aria-label="Alternar filtros" aria-expanded={mobileFilters} onClick={() => setMobileFilters(!mobileFilters)}>
-          <svg viewBox="0 0 24 24" width="23" height="23" stroke="currentColor" strokeWidth="1.8" fill="none" aria-hidden="true"><path d="M4 6h16M4 18h16"/><circle cx="9" cy="6" r="2.4" fill="#d28a4c"/><circle cx="16" cy="18" r="2.4" fill="#d28a4c"/></svg>
+          <SlidersIcon size={23}/>
         </button>
       </div>
       <section className="hero" aria-label="Apresentação da Kurio">
@@ -151,6 +152,6 @@ function HomePage() {
         <div className="copyright">© 2026 Kurio. Propriedade digital para todos. <a href="/validation">Diagnóstico técnico</a></div>
       </footer>
     </div>
-    <nav className="mobile-bottom-nav" aria-label="Navegação móvel"><a href="#top" aria-label="Início"><svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true"><path d="m3 11 9-8 9 8v9h-7v-6h-4v6H3z"/></svg></a><a href="#catalogo" aria-label="Favoritos"><span aria-hidden="true">♥</span></a><button className="mobile-scan" type="button" aria-label="Ver filtros" onClick={() => { setMobileFilters(true);goToCatalog() }}>▢</button><a href="#catalogo" aria-label="Mercado"><span aria-hidden="true">🛒</span></a><a href="#top" aria-label="Perfil"><span aria-hidden="true">♟</span></a></nav>
+    <MobileBottomNavigation onExplore={() => { setMobileFilters(true); goToCatalog() }}/>
   </main>
 }
