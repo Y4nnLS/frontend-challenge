@@ -6,6 +6,7 @@ import type { Nft } from '@/api/contracts/marketplace'
 import { marketplaceApi } from '@/api/marketplace-api'
 import { privateKey, useSession } from '@/auth/session-context'
 import { apiErrorMessage } from '@/shared/lib/api-error'
+import { CartIcon, HeartIcon } from '@/shared/components/icons'
 
 export function NftActions({ nft }: { nft: Nft }) {
   const { session } = useSession(); const navigate = useNavigate(); const queryClient = useQueryClient()
@@ -26,9 +27,9 @@ export function NftActions({ nft }: { nft: Nft }) {
   })
   const toggleFavorite = () => { if (!session) { void navigate({ to: '/login', search: { returnTo: location.pathname } }); return }; favoriteMutation.mutate() }
   return <section className="nft-actions" aria-label="Comprar NFT">
-    <label>Edição<select value={editionId} onChange={(event) => { setEditionId(event.target.value); setQuantity(1) }}>{nft.editions.map((item) => <option key={item.id} value={item.id}>{item.name} — {item.available} disponíveis</option>)}</select></label>
-    <label>Quantidade<input aria-label="Quantidade" type="number" min={1} max={edition?.available ?? 1} value={quantity} onChange={(event) => setQuantity(Math.max(1, Math.min(edition?.available ?? 1, Number(event.target.value) || 1)))} /></label>
-    <div><button type="button" className="primary-button" disabled={!edition || edition.available < 1 || cartMutation.isPending} onClick={() => cartMutation.mutate()}>{cartMutation.isPending ? 'Adicionando…' : 'Adicionar ao carrinho'}</button><button type="button" className="secondary-button" aria-pressed={favorite} onClick={toggleFavorite}>{favorite ? 'Remover favorito' : 'Favoritar'}</button></div>
+    <div className="edition-selector"><span>Edição:</span>{nft.editions.map((item) => <button key={item.id} type="button" className={item.id === editionId ? 'selected' : ''} onClick={() => { setEditionId(item.id); setQuantity(1) }} disabled={item.available < 1}>{item.name}</button>)}</div>
+    <div className="quantity-row"><span>Qtd.</span><button type="button" aria-label="Diminuir quantidade" disabled={quantity <= 1} onClick={() => setQuantity(quantity - 1)}>−</button><output aria-label="Quantidade">{quantity}</output><button type="button" aria-label="Aumentar quantidade" disabled={!edition || quantity >= edition.available} onClick={() => setQuantity(quantity + 1)}>+</button><strong>{edition ? `${edition.priceEth} ETH` : '—'}</strong></div>
+    <div><button type="button" className="primary-button" disabled={!edition || edition.available < 1 || cartMutation.isPending} onClick={() => cartMutation.mutate()}>{cartMutation.isPending ? 'Adicionando…' : <><CartIcon/>Comprar NFT</>}</button><button type="button" className="secondary-button favorite-button" aria-pressed={favorite} onClick={toggleFavorite}><HeartIcon/>{favorite ? 'Remover favorito' : 'Favoritar'}</button></div>
     {notice && <p role="status" className="mutation-notice">{notice}</p>}
   </section>
 }
