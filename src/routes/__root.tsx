@@ -1,5 +1,6 @@
 import type { QueryClient } from '@tanstack/react-query'
-import { Link, Outlet, createRootRouteWithContext } from '@tanstack/react-router'
+import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
+import { SessionProvider } from '@/auth/session-context'
 
 interface RouterContext {
   queryClient: QueryClient
@@ -7,21 +8,15 @@ interface RouterContext {
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: RootLayout,
-  notFoundComponent: () => <p className="p-8">Rota não encontrada.</p>,
+  notFoundComponent: () => (
+    <main className="mx-auto flex min-h-[70vh] max-w-5xl flex-col items-start justify-center gap-4 px-6">
+      <p className="eyebrow">404 · KURIO</p>
+      <h1 className="text-3xl font-bold">Página não encontrada</h1>
+      <a className="text-copper underline underline-offset-4" href="/">Voltar para o início</a>
+    </main>
+  ),
 })
 
 function RootLayout() {
-  return (
-    <main className="mx-auto min-h-screen max-w-3xl p-6">
-      <nav aria-label="Navegação de validação" className="mb-8 flex gap-4">
-        <Link to="/" activeProps={{ className: 'underline' }}>
-          Fundação
-        </Link>
-        <Link to="/validation" activeProps={{ className: 'underline' }}>
-          Validação
-        </Link>
-      </nav>
-      <Outlet />
-    </main>
-  )
+  return <SessionProvider><Outlet /></SessionProvider>
 }
