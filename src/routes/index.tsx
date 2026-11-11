@@ -8,15 +8,15 @@ import { NftCard, NftCardSkeleton } from '@/catalog/components/nft-card'
 import { useCatalog } from '@/catalog/queries/use-catalog'
 
 const categories = [
-  { id: 'nature', label: 'Arte digital', count: 33 },
-  { label: 'Fotografia', count: 12 },
-  { label: 'Música', count: 65 },
-  { id: 'warriors', label: 'Arte 3D', count: 39 },
-  { id: 'animals', label: 'Colecionáveis', count: 23 },
-  { label: 'Generativa', count: 17 },
-  { label: 'Jogos', count: 19 },
-  { label: 'Assinaturas', count: 13 },
-  { label: 'Utilidade', count: 18 },
+  { id: 'nature', label: 'Arte digital', count: 12 },
+  { label: 'Fotografia', count: 0 },
+  { label: 'Música', count: 0 },
+  { id: 'warriors', label: 'Arte 3D', count: 12 },
+  { id: 'animals', label: 'Colecionáveis', count: 12 },
+  { label: 'Generativa', count: 0 },
+  { label: 'Jogos', count: 0 },
+  { label: 'Assinaturas', count: 0 },
+  { label: 'Utilidade', count: 0 },
 ] as const
 const sorts: { id: NftSort, label: string }[] = [
   { id: 'recent', label: 'Listados recentemente' },
@@ -103,10 +103,10 @@ function HomePage() {
               {categories.map(category => {
                 const supported = 'id' in category
                 const selected = supported && search.category === category.id
-                return supported ? <label className={`filter-option ${selected || (!search.category && category.id === 'nature') ? 'selected' : ''}`} key={category.label}>
+                return supported ? <label className={`filter-option ${selected ? 'selected' : ''}`} key={category.label}>
                   <input type="radio" name="category" checked={Boolean(selected)} onChange={() => changeSearch({ category: selected ? undefined : category.id })} />
                   <span>{category.label}</span><span>({category.count})</span>
-                </label> : <div className="filter-option filter-option-static" key={category.label}><span>{category.label}</span><span>({category.count})</span></div>
+                </label> : <div className="filter-option filter-option-static" key={category.label} title="Sem coleções nesta demonstração"><span>{category.label}</span><span>({category.count})</span></div>
               })}
               {search.category && <button type="button" className="clear-category" onClick={() => changeSearch({ category: undefined })}>Todas as coleções</button>}
             </fieldset>
