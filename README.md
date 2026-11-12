@@ -1,4 +1,88 @@
-# Desafio Frontend — Marketplace de NFTs
+# KURIO — Marketplace de NFTs
+
+Aplicação entregue para o desafio Jungle Gaming: um marketplace de NFTs com catálogo, carrinho, autenticação, perfil, carteiras, checkout, pedidos e atualizações em tempo real, todos apoiados por uma API simulada no navegador.
+
+- Repositório: https://github.com/Y4nnLS/frontend-challenge
+- Aplicação pública: https://kurio-nft-marketplace-wbeat.vercel.app
+- Arquitetura, contratos e limitações: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
+- Métricas Lighthouse locais: [`docs/LIGHTHOUSE-2026-11-11.md`](docs/LIGHTHOUSE-2026-11-11.md)
+
+## Como executar
+
+Pré-requisito: Node.js compatível com o lockfile do projeto.
+
+```bash
+npm ci
+npm run dev
+```
+
+Para gerar e servir o bundle de produção:
+
+```bash
+npm run build
+npm run preview
+```
+
+## Tecnologias utilizadas
+
+React 19, TypeScript, Vite, TanStack Router, TanStack Query, Axios, `decimal.js`, MSW, Socket.IO Client, Tailwind CSS, shadcn/ui, Vitest, Playwright e Lighthouse.
+
+## Ambiente e MSW
+
+Os mocks MSW são ativados por padrão, inclusive no build de demonstração. A aplicação inicia o worker antes de carregar o roteador e o cliente Socket.IO.
+
+| Variável | Padrão | Uso |
+| --- | --- | --- |
+| `VITE_ENABLE_MSW` | ativado (qualquer valor diferente de `false`) | Defina `false` para não iniciar o worker MSW. |
+| `VITE_API_BASE_URL` | vazio (mesma origem) | Base URL de uma API REST compatível quando o MSW estiver desativado. |
+
+Com MSW desativado, o projeto não fornece backend próprio: a API alternativa deve implementar os contratos descritos em [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
+## Credenciais de demonstração
+
+| E-mail | Senha |
+| --- | --- |
+| `ana@jungle.test` | `Jungle#123` |
+| `bruno@jungle.test` | `Jungle#456` |
+
+## Cenários e fluxos de falha
+
+Com MSW ativo, os controles abaixo são destinados a desenvolvimento e E2E; não fazem parte da interface de produção.
+
+```js
+// Console do navegador na aplicação local
+await fetch('/api/__mock/reset', { method: 'POST' })
+
+await fetch('/api/__mock/scenario', {
+  method: 'PATCH',
+  headers: { 'content-type': 'application/json' },
+  body: JSON.stringify({ orderOutcome: 'declined' }),
+})
+```
+
+`POST /api/__mock/reset` restaura fixtures, sessões, carrinhos, pedidos e o cenário padrão. `PATCH /api/__mock/scenario` aceita, entre outros, `latencyMs`, `failNext` (`network`, `server` ou `validation`), `sessionExpired`, `registrationConflict`, `orderOutcome` (`pending`, `confirmed` ou `declined`) e `timeoutAfterCreate`.
+
+Fluxos reproduzíveis: use `orderOutcome: 'declined'` para manter os itens no carrinho; use `timeoutAfterCreate: true` para simular perda de resposta depois da criação e recuperar o mesmo pedido pela chave de idempotência; use `failNext` para validar feedback de rede, servidor ou formulário; e use `sessionExpired: true` para testar a limpeza de sessão privada.
+
+## Testes e auditoria
+
+```bash
+npm run typecheck
+npm run lint
+npm run test
+npm run test:e2e
+npm run build
+```
+
+O log versionado da suíte E2E registra 48/48 cenários Playwright aprovados em Chromium desktop e mobile. A suíte Vitest executada na revisão desta documentação registrou 20/20 testes aprovados. As pontuações Lighthouse são evidências de preview HTTP local, não uma medição do deploy público; elas foram mantidas sem alteração no documento de Lighthouse.
+
+## Limitações da demonstração
+
+Pagamentos, carteiras, cotações de rede, recibos, identificadores de transação e links de explorador são simulados. Não há blockchain, provedor de carteira, OAuth, gateway de pagamento ou servidor Socket.IO de produção. Consulte a arquitetura para os limites específicos da simulação MSW/Socket.IO.
+
+## Enunciado oficial do desafio
+
+O conteúdo a seguir é preservado como enunciado e critérios originais do desafio; ele não descreve, por si só, o status final da entrega.
 
 Implemente o **NFT Marketplace** em React e TypeScript, seguindo o [layout no Figma](https://www.figma.com/design/Ff0SksUi7UFtPWUO8kyNtw/Frontend-Challenge?node-id=0-1).
 

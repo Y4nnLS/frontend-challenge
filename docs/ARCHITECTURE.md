@@ -1,184 +1,59 @@
-# Architecture
+# Arquitetura
 
-Status: functional foundation implemented; final Figma visual fidelity remains pending.
+## Visão geral
 
-## Build and routing
-- React + TypeScript + Vite.
-- TanStack Router with file-based routing.
-- Route search params are the source of truth for catalog search, filters, sort and page.
-- Private routes validate/recover session and preserve intended navigation for resume.
+KURIO é uma SPA React/TypeScript construída com Vite. O TanStack Router define as rotas e mantém busca, filtros, ordenação e paginação do catálogo na URL. O TanStack Query é a fonte de estado para dados remotos; Axios é o único cliente REST de funcionalidades. MSW fornece a API simulada no navegador e em testes.
 
-## Remote state
-- TanStack Query owns API-derived data.
-- Query keys include every parameter that changes the response.
-- Private query keys also include the authenticated user identity.
-- Use cancellation/AbortSignal where applicable and prevent stale responses from replacing newer state.
-- Document final `staleTime`, retry and invalidation policy after real behavior is implemented.
-- Foundation policy: queries use a 30-second `staleTime`, retry once, and do not
-  refetch on window focus. Feature-specific policies and invalidation rules remain
-  pending with their API contracts.
+As rotas privadas (checkout, pedidos, perfil, favoritos e carteiras) dependem da sessão e preservam a rota de retorno. A aplicação publicada usa o fallback SPA configurado na Vercel, portanto URLs internas são resolvidas pelo cliente após um refresh.
 
-## HTTP
-- One centralized Axios client.
-- Typed transport contracts.
-- Session context added centrally.
-- Consistent error mapping.
-- No mock branching inside components/hooks.
+## REST e contratos
 
-## Money
-- ETH values cross transport boundaries as decimal strings.
-- Use exact decimal arithmetic (`decimal.js` recommended) for subtotal, discounts, network fee and total.
-- Define one rounding policy and formatting helper.
-- Checkout uses the quote returned by the mock API as authoritative.
-- Order receipt stores an immutable pricing snapshot.
+Os tipos de transporte ficam em `src/api/contracts/marketplace.ts` e são consumidos pelo cliente Axios, handlers MSW e interface. A API simulada expõe:
 
-## Mock backend
-MSW is the simulated network/backend layer.
+| Recurso | Endpoints |
+| --- | --- |
+| Sessão | `POST /api/auth/{login,register,logout}`, `GET /api/auth/session` |
+| NFTs | `GET /api/nfts`, `GET /api/nfts/:id` |
+| Favoritos | `GET /api/favorites`, `PUT`/`DELETE /api/favorites/:nftId` |
+| Carrinho | `GET /api/cart`, `PUT`/`PATCH`/`DELETE /api/cart/items`, `PUT /api/cart/coupon`, `POST /api/cart/merge-guest` |
+| Cotação e pedido | `POST /api/coupons/validate`, `POST /api/quotes`, `POST /api/orders`, `GET /api/orders` e `GET /api/orders/:orderId` |
+| Perfil e carteiras | `GET`/`PATCH /api/profile`, `POST /api/profile/password`, `GET`/`POST /api/wallets`, `PATCH /api/wallets/:walletId` |
 
-Use one coherent mock data store for:
-- users/session
-- NFTs/editions
-- favorites
-- carts
-- coupons/quotes
-- orders/receipts
-- profiles
-- wallets
-- scenario state
+Os handlers retornam erros estruturados com `code`, `message` e, quando aplicável, `fields`; os casos incluem 401, 404, 409, 422, erro de rede e 500 simulados. Os controles `POST /api/__mock/reset`, `PATCH /api/__mock/scenario` e endpoints relacionados existem exclusivamente para desenvolvimento/E2E e não são chamados pelas funcionalidades da interface.
 
-Persistence is allowed where refresh behavior requires it. Provide a deterministic full reset.
+## Sessão, isolamento e carrinho
 
-Expose deterministic mock-control endpoints for Playwright/development scenarios. The application UI must not use them for business behavior.
+O token de sessão simulado é mantido em `localStorage` e enviado em `x-session-token`; a sessão dura uma hora na base mock. O cliente consulta `/api/auth/session` ao restaurar a página. Sessão inválida/expirada remove o token e todas as queries privadas. Login, cadastro e logout também invalidam ou removem o cache privado. As chaves privadas incluem o id do usuário, impedindo que favoritos, pedidos, perfil, carteiras e carrinho de uma conta sejam lidos por outra. Senhas não são persistidas em claro: a fixture guarda apenas um valor derivado, adequado apenas à demonstração.
 
-## Session isolation
-- Persist only a simulated session identifier/token needed to recover the session.
-- Do not persist plaintext passwords.
-- Store fixture/user password verification material as a derived hash for the simulation and document that it is not production authentication.
-- Private Query keys are scoped by user.
-- Logout/user switch removes private queries, cancels in-flight private requests, disconnects old subscriptions and reconnects only for the new session.
+Todo request carrega também um `x-guest-id`. Antes da autenticação, o carrinho é associado a `guest:<id>` e persiste no armazenamento da simulação. Após login ou cadastro, `POST /api/cart/merge-guest` soma itens da mesma edição, preserva itens distintos e limita cada quantidade ao estoque atual; a resposta informa eventuais ajustes `STOCK_LIMIT`. O cupom do usuário autenticado prevalece; se não houver um, o cupom do visitante é usado. O carrinho visitante é esvaziado depois do merge.
 
-## Cart
-Identity key: `nftId + editionId`.
+## Cache e invalidação
 
-Guest cart persists across refresh.
-On login:
-- merge guest and authenticated cart according to a documented policy;
-- cap/validate quantities against current availability;
-- preserve the resulting cart on refresh.
+A política padrão do Query é: `staleTime` de 30 segundos, uma tentativa após falha e sem refetch ao focar a janela. Chaves de catálogo incluem todos os parâmetros da URL; chaves privadas incluem usuário e recurso. Mutations gravam o retorno no cache quando ele é definitivo (por exemplo, carrinho e perfil) ou invalidam a chave afetada (por exemplo, carteiras, pedidos e login). Não há otimismo de preço/estoque: a resposta REST ou a cotação autoritativa atualiza a tela. Ao sair ou expirar a sessão, as queries privadas são removidas.
 
-Socket updates may mark price/availability as changed, but checkout must revalidate through the quote API.
+## Valores, cotações e pedidos
 
-## Orders and idempotency
-Order create accepts `Idempotency-Key`.
+ETH atravessa a API como string decimal de 18 casas. `decimal.js` calcula soma, subtração, multiplicação e comparação com precisão 40 e arredondamento `ROUND_HALF_UP`; números de ponto flutuante do JavaScript não participam dos totais. A cotação calcula linhas, desconto, taxa e total usando o catálogo atual, inclui um fingerprint e é válida por cinco minutos. Checkout só cria um pedido com cotação ainda válida e cujo fingerprint/total ainda corresponde ao catálogo.
 
-Mock store keeps:
-- key
-- canonical request fingerprint
-- order id
-- order snapshot
-- current status
+`POST /api/orders` exige `Idempotency-Key`, escopado ao usuário. A mesma chave com o mesmo payload retorna o pedido original; com payload diferente retorna 409. No cenário de timeout, a criação é persistida antes de a resposta de rede ser perdida, permitindo recuperação idempotente. Pedidos podem ser `pending`, `confirmed` ou `declined`; os dois últimos são terminais. A confirmação reduz estoque e remove apenas as quantidades compradas do carrinho; a recusa preserva o carrinho. O recibo é um snapshot imutável, com valores e referência de transação simulada.
 
-Rules:
-- new key => create once;
-- same key + same fingerprint => return existing order;
-- same key + different fingerprint => 409 conflict;
-- timeout-after-create scenario persists the order before simulating the lost response.
+## Tempo real e reconciliação
 
-Persist the active checkout attempt key and payload until a terminal result is recovered.
+O cliente usa `socket.io-client` em WebSocket-only. O MSW intercepta o transporte com `@mswjs/socket.io-binding`. A base de dados emite envelopes versionados para `nft.updated` e `order.updated`, com id de evento, recurso, versão, data e payload. O pedido é entregue somente à sessão do respectivo usuário.
 
-Statuses: pending, confirmed, declined.
-Confirmed and declined are terminal.
+`RealtimeEventGate` descarta ids duplicados e versões menores ou iguais à já vista. Eventos de NFT atualizam o detalhe e invalidam catálogo/dados privados; eventos de pedido atualizam o pedido e invalidam a lista de pedidos. A cada reconexão, o cliente invalida as queries ativas para buscar a fonte REST. Os listeners são removidos e o socket desconectado quando a sessão muda ou o provider é desmontado.
 
-## Realtime
-Use `socket.io-client` in application code.
+## Limites conhecidos
 
-Use MSW WebSocket support with `@mswjs/socket.io-binding` for the mock transport.
+- MSW, a base mock, carteiras e pagamentos executam inteiramente no navegador: não há backend, blockchain, extensão de carteira, cobrança ou transação real.
+- O binding Socket.IO usado pelo MSW cobre a conexão WebSocket, eventos e a assinatura simulada desta aplicação; não oferece paridade completa de servidor Socket.IO (como rooms, namespaces e broadcast de produção).
+- WalletConnect, MetaMask e Coinbase Wallet são opções de interface/simulação; não conectam provedores externos. Links de explorador e identificadores de transação no recibo também são simulados.
+- Login social é exibido como indisponível, sem alegar integração OAuth.
 
-Required events:
-- `nft.updated`
-- `order.updated`
+## UX e Figma
 
-Event envelope should include:
-- stable event id
-- resource id
-- resource version
-- payload
+A implementação aplica layouts responsivos e possui testes de contenção em 390, 414, 768, 1024, 1155, 1280 e 1440 px. Login/cadastro usam modal com backdrop no desktop e shell dedicado no mobile, com Escape, fechamento pelo backdrop, foco inicial e retorno à rota anterior. As capturas visuais de home, detalhe, carrinho e checkout fazem parte da suíte E2E. Elas sustentam a revisão funcional e de responsividade, mas não constituem alegação de equivalência pixel-perfect absoluta ao Figma.
 
-Client tracks latest resource version / processed ids:
-- ignore duplicates;
-- ignore older versions;
-- never regress state;
-- clean listeners;
-- on reconnect, revalidate active resources through REST.
+## Verificação e deploy
 
-Socket effects update/invalidate TanStack Query; REST remains the reconciliation source of truth.
-
-### Foundation mock transport
-- Development and E2E start MSW before React renders, therefore before any Socket.IO
-  client is created.
-- The proof connection uses `socket.io-client` with WebSocket-only transport and the
-  default Socket.IO namespace. MSW's `ws.link('*')` receives the WebSocket and
-  `@mswjs/socket.io-binding` decodes/encodes the Socket.IO event.
-- The binding does not provide full Socket.IO parity (notably rooms, namespaces and
-  broadcasting). These are intentionally outside the foundation spike; later events
-  must stay in the documented supported subset or use an integration with the needed
-  capability.
-
-## Testing
-Playwright uses deterministic reset + scenario controls.
-
-Highest-priority flows:
-1. URL search/filter/sort/page persistence.
-2. Login/session expiration/user switch isolation.
-3. Cart persistence and coupon.
-4. Complete confirmed purchase.
-5. Declined purchase.
-6. Repeated click + timeout + idempotent recovery.
-7. `nft.updated` during cart/checkout and stale quote reconfirmation.
-8. Duplicate/old event handling and pending-order recovery.
-9. Keyboard/focus and skeleton/error recovery.
-
-Visual baselines: home, NFT detail, cart, checkout.
-
-## Deployment
-Deploy an optimized Vite SPA with history fallback.
-Mocks and Socket.IO simulation must work in the public build.
-Direct route access and refresh must resolve correctly.
-
-## Cycle 1 mock API implementation
-
-### Contracts and transport
-- `src/api/contracts/marketplace.ts` is the shared transport-contract module
-  for NFTs/editions, list parameters/pages, sessions, profiles, wallets,
-  favorites, carts, coupons, quotes, orders/receipts and realtime envelopes.
-- `src/api/marketplace-api.ts` is the feature-facing REST client and uses the
-  central Axios instance. ETH values stay 18-place decimal strings; `decimal.js`
-  is used by `src/shared/lib/money.ts` rather than JavaScript float arithmetic.
-
-### Mock store and business policy
-- `MockDatabase` is the single MSW source of truth: six varied NFTs, two users,
-  profiles, wallets, favorites, carts, quotes, orders and sessions live in one
-  coherent state object. Browser localStorage persistence restores refreshes;
-  reset restores the deterministic fixture exactly.
-- Password fixture material is a non-production derived string, never plaintext.
-  Private records are keyed by session user id; guest carts use `guest:<id>`.
-- Quotes recompute current catalog data and carry a fingerprint, exact totals and
-  a five-minute validity. `Idempotency-Key` stores a canonical payload
-  fingerprint. Equal retries recover one order; differing payloads return 409.
-  Timeout-after-create persists before the simulated lost response. Receipts are
-  immutable copies. Confirmed orders decrement stock/remove purchased quantities;
-  declined orders preserve carts.
-
-### REST, scenarios and realtime
-- MSW implements `/api/auth`, `/api/nfts`, `/api/favorites`, `/api/cart`,
-  `/api/coupons/validate`, `/api/quotes`, `/api/orders`, `/api/profile` and
-  `/api/wallets`, with 401/404/409/422 and simulated network/500 responses.
-- Development/E2E-only mock controls provide reset, scenario patching, fixture
-  sessions and catalog mutations. Scenarios cover empty data, latency, network
-  and HTTP failures, expired session, registration conflict, coupons, catalog
-  changes, pending/confirmed/declined orders and timeout recovery.
-- Database mutations emit typed, versioned `nft.updated` and user-scoped
-  `order.updated` through the existing `socket.io-client`/MSW binding. The
-  `RealtimeEventGate` ignores duplicate ids and stale versions; subscriptions
-  clean up listeners and request REST reconciliation after reconnect. Binding
-  support remains limited to its default namespace/client event subset.
+O log `test-results/full-e2e.stdout.log` registra 48 testes Playwright aprovados (desktop e mobile). A suíte Vitest executada nesta revisão registrou 20 testes aprovados. As métricas Lighthouse locais estão preservadas em `docs/LIGHTHOUSE-2026-11-11.md`; não são uma medição da Vercel. A URL pública de entrega é https://kurio-nft-marketplace-wbeat.vercel.app.
