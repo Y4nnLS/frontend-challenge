@@ -30,6 +30,7 @@ function NftDetailPage() {
   });
   const collectionQuery = useCatalog({ page: 1, pageSize: 6, sort: "recent" });
   const [activeTab, setActiveTab] = useState<"details" | "reviews">("details");
+  const [activeImage, setActiveImage] = useState(0);
   const tokenNumber = nftQuery.data?.name.match(/#(\d+)/)?.[1];
   return (
     <div className="kurio-app">
@@ -82,8 +83,10 @@ function NftDetailPage() {
                       <button
                         type="button"
                         aria-label={`Visualização ${index + 1}`}
-                        className={index === 0 ? "active" : ""}
+                        aria-pressed={index === activeImage}
+                        className={index === activeImage ? "active" : ""}
                         key={index}
+                        onClick={() => setActiveImage(index)}
                       >
                         <NftArtwork nft={nftQuery.data} />
                       </button>

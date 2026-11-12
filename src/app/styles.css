@@ -2813,18 +2813,21 @@ select:focus-visible {
 /* Audit completion: private flow layouts share the Figma dimensions while
    keeping all content driven by the existing API state. */
 .detail-layout {
-  grid-template-columns: 505px minmax(0, 1fr);
-  gap: 32px;
+  width: 100%;
+  grid-template-columns: minmax(0, 505px) minmax(0, 1fr);
+  gap: 48px;
   align-items: start;
-  max-width: 1060px;
-  margin: 36px auto 0;
+  max-width: none;
+  margin: 36px 0 0;
 }
 .detail-gallery {
   grid-template-columns: 92px minmax(0, 1fr);
   gap: 18px;
+  min-width: 0;
 }
 .detail-thumbnails {
   gap: 12px;
+  min-width: 0;
 }
 .detail-thumbnails button {
   width: 88px;
@@ -2833,16 +2836,21 @@ select:focus-visible {
   background: #291813;
 }
 .detail-art {
+  width: 100%;
+  min-width: 0;
   height: 430px;
   padding: 16px;
   background: #291813;
 }
 .detail-art .nft-image {
+  display: block;
   object-fit: cover;
   border-radius: 7px;
 }
 .detail-information {
-  max-width: 520px;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
   padding-top: 4px;
 }
 .detail-heading h1 {
@@ -2923,6 +2931,18 @@ select:focus-visible {
 }
 .quantity-row strong {
   display: none;
+}
+
+@media (max-width: 1080px) and (min-width: 761px) {
+  .detail-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .detail-gallery,
+  .detail-information {
+    max-width: 720px;
+  }
 }
 .nft-actions .primary-button {
   min-width: 115px;
@@ -3902,7 +3922,7 @@ select:focus-visible {
 
   .detail-page {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .detail-page .detail-layout {
@@ -4134,6 +4154,21 @@ select:focus-visible {
   align-items: start;
 }
 
+/* Cart and product detail share the header's 1200px content rail. Their
+   columns can shrink and then stack before either reaches the other column. */
+.account-page:has(.cart-page) {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.cart-page,
+.cart-page .cart-layout,
+.cart-page .cart-items,
+.cart-page .order-summary,
+.cart-page .cart-item > div:nth-child(2) {
+  min-width: 0;
+}
+
 .cart-page .cart-table-head,
 .cart-page .cart-item {
   display: grid;
@@ -4332,6 +4367,17 @@ select:focus-visible {
 }
 .cart-page .order-summary .primary-button {
   margin-top: 18px;
+}
+
+@media (max-width: 1080px) and (min-width: 761px) {
+  .cart-page .cart-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .cart-page .order-summary {
+    max-width: 420px;
+  }
 }
 
 @media (max-width: 760px) {
