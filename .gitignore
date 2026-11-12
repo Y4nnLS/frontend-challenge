@@ -3,5 +3,11 @@ dist/
 playwright-report/
 test-results/
 /qa-visual/
+/ref-*.png
+/reference-sheet.png
+/docs/Jungle_Gaming_Auditoria_*.md
+/docs/Jungle_Gaming_Parecer_*.md
+/docs/Jungle_Gaming_RELATORIO_*.md
+/docs/Jungle_Gaming_PROMPT_*.md
 .env.local
 /frontend-challenge.zip
