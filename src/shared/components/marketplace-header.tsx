@@ -63,7 +63,7 @@ export function MarketplaceHeader({ onSearch }: { onSearch?: () => void }) {
 export function MobileAccountNavigation() {
   const { session, logout } = useSession()
   const returnTo = `${location.pathname}${location.search}`
-  return <nav className="mobile-account-navigation" aria-label="Navegação da conta">
+  return <nav className={`mobile-account-navigation${session ? ' mobile-session-navigation' : ''}`} aria-label="Navegação da conta">
     <Link to="/" aria-label="Início">KURIO</Link>
     <Link to="/cart">Carrinho</Link>
     {session ? <><Link to="/profile">Perfil</Link><button type="button" onClick={() => void logout()}>Sair</button></> : <Link to="/login" search={{ returnTo }}>Entrar</Link>}
